@@ -1,0 +1,2 @@
+pedal_hw.c:36:6:PEDAL_HW_Init	8	static
+pedal_hw.c:59:6:HAL_ADC_ConvCpltCallback	16	static

@@ -1,0 +1,4 @@
+decode_data.c:60:6:DECODE_DATA_Process	8	static
+decode_data.c:86:13:DECODE_DATA_Decode_Control	4	static
+decode_data.c:138:13:DECODE_DATA_Decode_Bms	4	static
+decode_data.c:158:13:DECODE_DATA_Decode_Inversor	4	static

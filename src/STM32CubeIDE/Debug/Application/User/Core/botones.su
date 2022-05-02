@@ -1,0 +1,6 @@
+botones.c:52:6:BOTONES_Process	8	static
+botones.c:76:6:HAL_GPIO_EXTI_Callback	16	static
+botones.c:103:13:BOTONES_Update_HM_Btns	8	static
+botones.c:133:13:BOTONES_Update_HM_State	4	static
+botones.c:154:13:BOTONES_Send_HM_State	16	static
+botones.c:176:13:BOTONES_Send_DrivingMode_Btn	16	static
