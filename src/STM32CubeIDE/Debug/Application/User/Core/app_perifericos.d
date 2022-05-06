@@ -35,18 +35,18 @@ Application/User/Core/app_perifericos.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.h \
- ../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos_errno.h \
+ ../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.h \
+ ../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos_errno.h \
  ../../Core/Inc/buses.h ../../Core/Inc/pedal.h ../../Core/Inc/pedal_hw.h \
  ../../Core/Inc/adc.h ../../Core/Inc/dma.h ../../Core/Inc/tim.h \
  ../../Core/Inc/pantalla.h ../../Core/Inc/pantalla_hw.h \
  ../../Core/Inc/usart.h ../../Core/Inc/pantalla_api.h \
  ../../Core/Inc/indicators.h ../../Core/Inc/decode_data.h \
- ../../Core/Inc/can_app.h ../../Core/Inc/can_hw.h ../../Core/Inc/can.h \
- C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/CAN_Driver/can_api.h \
- C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/CAN_Driver/can_wrapper.h \
- C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/CAN_Driver/can_api.h \
- ../../Core/Inc/main.h ../../Core/Inc/decode_data.h
+ ../../Core/Inc/can_app.h ../../Drivers/CAN_Driver/can_api.h \
+ ../../Core/Inc/can_hw.h ../../Core/Inc/can.h \
+ ../../Drivers/CAN_Driver/can_wrapper.h \
+ ../../Drivers/CAN_Driver/can_api.h ../../Core/Inc/main.h \
+ ../../Core/Inc/decode_data.h
 
 ../../Core/Inc/app_perifericos.h:
 
@@ -128,9 +128,9 @@ Application/User/Core/app_perifericos.o: \
 
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.h:
+../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.h:
 
-../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos_errno.h:
+../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos_errno.h:
 
 ../../Core/Inc/buses.h:
 
@@ -158,15 +158,15 @@ Application/User/Core/app_perifericos.o: \
 
 ../../Core/Inc/can_app.h:
 
+../../Drivers/CAN_Driver/can_api.h:
+
 ../../Core/Inc/can_hw.h:
 
 ../../Core/Inc/can.h:
 
-C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/CAN_Driver/can_api.h:
+../../Drivers/CAN_Driver/can_wrapper.h:
 
-C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/CAN_Driver/can_wrapper.h:
-
-C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/CAN_Driver/can_api.h:
+../../Drivers/CAN_Driver/can_api.h:
 
 ../../Core/Inc/main.h:
 

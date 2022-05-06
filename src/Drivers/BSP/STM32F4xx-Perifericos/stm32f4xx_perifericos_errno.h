@@ -1,6 +1,6 @@
 /**
  * @file stm32f4xx_perifericos_errno.h
- * @author Subgrupo Control y Periféricos
+ * @author Subgrupo Control y Periféricos - Elektron Motorsports
  * @brief Códigos de error de driver BSP (board support package)
  * @version 0.1
  * @date 2022-01-11

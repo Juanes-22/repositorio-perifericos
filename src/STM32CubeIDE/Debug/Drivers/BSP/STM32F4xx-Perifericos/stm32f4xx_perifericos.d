@@ -1,6 +1,6 @@
-Drivers/BSP/STM32F44xx-Perifericos/stm32f4xx_perifericos.o: \
- C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.c \
- C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.h \
+Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.o: \
+ C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.c \
+ C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../../Core/Inc/stm32f4xx_hal_conf.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -33,9 +33,9 @@ Drivers/BSP/STM32F44xx-Perifericos/stm32f4xx_perifericos.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos_errno.h
+ C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos_errno.h
 
-C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.h:
+C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.h:
 
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -101,4 +101,4 @@ C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/
 
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos_errno.h:
+C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos_errno.h:

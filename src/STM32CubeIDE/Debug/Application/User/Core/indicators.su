@@ -1,2 +1,2 @@
 indicators.c:51:6:INDICATORS_Finish_StartUp	16	static
-indicators.c:102:6:INDICATORS_Process	8	static
+indicators.c:102:6:INDICATORS_Process	4	static

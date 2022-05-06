@@ -12,7 +12,7 @@ RM := rm -rf
 -include Drivers/STM32F4xx_HAL_Driver/subdir.mk
 -include Drivers/CMSIS/subdir.mk
 -include Drivers/CAN_Driver/subdir.mk
--include Drivers/BSP/STM32F44xx-Perifericos/subdir.mk
+-include Drivers/BSP/STM32F4xx-Perifericos/subdir.mk
 -include Application/User/Startup/subdir.mk
 -include Application/User/Core/subdir.mk
 -include objects.mk

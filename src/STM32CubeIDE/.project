@@ -262,9 +262,9 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/usart.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32F44xx-Perifericos/stm32f4xx_perifericos.c</name>
+			<name>Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.c</name>
 			<type>1</type>
-			<location>C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.c</location>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

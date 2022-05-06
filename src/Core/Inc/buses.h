@@ -31,6 +31,7 @@ typedef struct bus1
 {
 
 	btn_modo_manejo_t 		btn_modo_manejo;	// boton modo de manejo presionado
+
 	btn_state_t 			btn_hm1;			// boton 1 hombre muerto
 	btn_state_t 			btn_hm2;			// boton 2 hombre muerto
 	hm_state_t 				hm_state;			// estado de hombre muerto
@@ -38,10 +39,10 @@ typedef struct bus1
 	uint32_t 				adc_reading;		// lectura de ADC pedal
 	uint32_t 				pedal;				// valor de pedal convertido
 
-    /* Estructuras con variables decodificadas de los módulos */
+	/* Estructuras con variables decodificadas de los módulos */
 	rx_control_vars_t		Rx_Control;
 	rx_bms_vars_t           Rx_Bms;
-    rx_inversor_vars_t		Rx_Inversor;
+	rx_inversor_vars_t		Rx_Inversor;
 
 } typedef_bus1_t;
 
@@ -59,7 +60,7 @@ typedef struct bus2
 } typedef_bus2_t;
 
 /**
- * @brief Bus 3: bus de variables que se reciben de CAN
+ * @brief Bus 3: bus de variables que se reciben por CAN
  *
  */
 typedef struct bus3

@@ -22,7 +22,7 @@ OBJCOPY_BIN :=
 SUBDIRS := \
 Application/User/Core \
 Application/User/Startup \
-Drivers/BSP/STM32F44xx-Perifericos \
+Drivers/BSP/STM32F4xx-Perifericos \
 Drivers/CAN_Driver \
 Drivers/CMSIS \
 Drivers/STM32F4xx_HAL_Driver \

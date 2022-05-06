@@ -1,6 +1,6 @@
 /**
  * @file stm32f4xx_perifericos.h
- * @author Subgrupo Control y Periféricos
+ * @author Subgrupo Control y Periféricos - Elektron Motorsports
  * @brief Archivo header para stm32f4xx_perifericos.c
  * @version 0.1
  * @date 2022-04-18
@@ -129,10 +129,6 @@ int32_t    BSP_BUZZER_DeInit(void);
 int32_t    BSP_BUZZER_On(void);
 
 int32_t    BSP_BUZZER_Off(void);
-
-int32_t    BSP_BUZZER_Toggle(void);
-
-int32_t    BSP_BUZZER_GetState(void);
 
 /**
   * @}

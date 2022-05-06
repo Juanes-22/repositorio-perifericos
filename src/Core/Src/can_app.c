@@ -88,7 +88,7 @@ void CAN_APP_Send_BusData(typedef_bus2_t *bus_can_output)
 
 	/* ------------- Send hombre_muerto ------------- */
 
-	can_obj.Frame.id = CAN_ID_DEAD_MAN;
+	can_obj.Frame.id = CAN_ID_HOMBRE_MUERTO;
 	can_obj.Frame.payload_length = 1;
 	can_obj.Frame.payload_buff[0] = bus_can_output->hombre_muerto;
 
@@ -99,7 +99,7 @@ void CAN_APP_Send_BusData(typedef_bus2_t *bus_can_output)
 
 	/* --------- Send botones_cambio_estado --------- */
 
-	can_obj.Frame.id = CAN_ID_BUTTONS_CHANGE_STATE;
+	can_obj.Frame.id = CAN_ID_BOTONES_CAMBIO_ESTADO;
 	can_obj.Frame.payload_length = 1;
 	can_obj.Frame.payload_buff[0] = bus_can_output->botones_cambio_estado;
 
@@ -110,7 +110,7 @@ void CAN_APP_Send_BusData(typedef_bus2_t *bus_can_output)
 
 	/* ------------ Send perifericos_ok ------------ */
 
-	can_obj.Frame.id = CAN_ID_PERIPHERALS_OK;
+	can_obj.Frame.id = CAN_ID_PERIFERICOS_OK;
 	can_obj.Frame.payload_length = 1;
 	can_obj.Frame.payload_buff[0] = bus_can_output->perifericos_ok;
 
@@ -155,14 +155,17 @@ static void CAN_APP_Store_ReceivedMessage(void)
 		break;
 	case CAN_ID_CORRIENTE_BMS:
 		bus_can_input.corriente_bms = can_obj.Frame.payload_buff[0];
+		break;
 	case CAN_ID_POTENCIA_BMS:
 		bus_can_input.potencia_bms = can_obj.Frame.payload_buff[0];
+		break;
 	case CAN_ID_NIVEL_BATERIA_BMS:
 		bus_can_input.nivel_bateria_bms = can_obj.Frame.payload_buff[0];
+		break;
 
 	/* ----------------------- Inversor ----------------------- */
 
-	case CAN_ID_VELOCIDAD_INV:
+	case CAN_ID_VELOCIDAD_INVERSOR:
 		bus_can_input.velocidad_inv = can_obj.Frame.payload_buff[0];
 		break;
 	}

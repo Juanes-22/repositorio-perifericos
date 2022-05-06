@@ -35,8 +35,8 @@ Drivers/CAN_Driver/can_wrapper.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.h \
- ../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos_errno.h
+ ../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.h \
+ ../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos_errno.h
 
 C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/CAN_Driver/can_wrapper.h:
 
@@ -108,6 +108,6 @@ C:/Users/juane/OneDrive/Escritorio/elektron-stm32-workspace/Perifericos/Drivers/
 
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.h:
+../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.h:
 
-../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos_errno.h:
+../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos_errno.h:

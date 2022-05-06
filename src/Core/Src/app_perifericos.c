@@ -126,7 +126,7 @@ void MX_APP_Process(void)
 		}
 		break;
 
-	/* Estado Tarjeta de periféricos running */
+	/* Estado Tarjeta de Periféricos running */
 	case kRUNNING:
 
 	    BOTONES_Process();

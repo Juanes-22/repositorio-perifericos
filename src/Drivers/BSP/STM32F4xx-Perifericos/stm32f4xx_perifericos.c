@@ -1,6 +1,6 @@
 /**
  * @file stm32f4xx_perifericos.c
- * @author Subgrupo Control y Periféricos
+ * @author Subgrupo Control y Periféricos - Elektron Motorsports
  * @brief Driver BSP (board support package) para tarjeta de Periféricos
  * @version 0.1
  * @date 2022-04-18

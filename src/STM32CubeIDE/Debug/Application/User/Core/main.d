@@ -33,11 +33,9 @@ Application/User/Core/main.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.h \
- ../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos_errno.h \
- ../../Core/Inc/adc.h ../../Core/Inc/main.h ../../Core/Inc/can.h \
- ../../Core/Inc/dma.h ../../Core/Inc/tim.h ../../Core/Inc/usart.h \
- ../../Core/Inc/gpio.h ../../Core/Inc/app_perifericos.h
+ ../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.h \
+ ../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos_errno.h \
+ ../../Core/Inc/app_perifericos.h
 
 ../../Core/Inc/main.h:
 
@@ -105,22 +103,8 @@ Application/User/Core/main.o: \
 
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos.h:
+../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos.h:
 
-../../Drivers/BSP/STM32F44x-Perifericos/stm32f4xx_perifericos_errno.h:
-
-../../Core/Inc/adc.h:
-
-../../Core/Inc/main.h:
-
-../../Core/Inc/can.h:
-
-../../Core/Inc/dma.h:
-
-../../Core/Inc/tim.h:
-
-../../Core/Inc/usart.h:
-
-../../Core/Inc/gpio.h:
+../../Drivers/BSP/STM32F4xx-Perifericos/stm32f4xx_perifericos_errno.h:
 
 ../../Core/Inc/app_perifericos.h:
