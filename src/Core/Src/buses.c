@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2022-04-11
  *
- * @copyright Copyright (c) 2021
+ * @copyright Copyright (c) 2022
  *
  */
 
@@ -27,7 +27,7 @@ typedef_bus1_t bus_data =
 		.btn_hm2 = kBTN_NOT_PRESSED,
 		.hm_state = kHOMBRE_MUERTO_OFF,
 
-		.pedal = 0U,
+		.pedal = 0.0,
 
 		.Rx_Control = {.control_ok = kMODULE_INFO_ERROR},
 		.Rx_Bms = {0},
@@ -38,4 +38,4 @@ typedef_bus1_t bus_data =
 typedef_bus2_t bus_can_output = { .perifericos_ok = CAN_VALUE_MODULE_OK };
 
 /* Inicialización de bus de recepción CAN (bus 3) */
-typedef_bus3_t bus_can_input = { 0 };
+typedef_bus3_t bus_can_input = { .control_ok = CAN_VALUE_MODULE_ERROR };

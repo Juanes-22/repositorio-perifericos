@@ -1,8 +1,12 @@
-/*
- * can_app.h
+/**
+ * @file can_app.h
+ * @author Subgrupo Control y Periféricos - Elektron Motorsports
+ * @brief Archivo header para can_app.c
+ * @version 0.1
+ * @date 2022-04-11
  *
- *  Created on: 20/04/2022
- *      Author: Juan
+ * @copyright Copyright (c) 2022
+ *
  */
 
 #ifndef _CAN_APP_H_

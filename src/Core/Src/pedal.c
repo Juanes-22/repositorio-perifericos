@@ -1,8 +1,12 @@
-/*
- * pedal.c
+/**
+ * @file pedal.c
+ * @author Subgrupo Control y Periféricos - Elektron Motorsports
+ * @brief Código aplicativo para pedal
+ * @version 0.1
+ * @date 2022-04-12
  *
- *  Created on: 18/04/2022
- *      Author: Juan
+ * @copyright Copyright (c) 2022
+ *
  */
 
 /***********************************************************************************************************************
@@ -12,12 +16,16 @@
 #include "pedal.h"
 
 /***********************************************************************************************************************
- * Macros
+ * Private macros
  **********************************************************************************************************************/
 
 /** Valores que corresponden al 0 y 100 del pedal */
 #define MIN_ADC_VAL			300.0
 #define MAX_ADC_VAL			3800.0
+
+/***********************************************************************************************************************
+ * Private variables definitions
+ **********************************************************************************************************************/
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -70,11 +78,11 @@ static void PEDAL_Map_ADC_Reading(void)
 		/* ADC reading mapping */
 		if(bus_data.adc_reading < MIN_ADC_VAL)
 		{
-			bus_data.pedal = 0U;
+			bus_data.pedal = 0.0;
 		}
 		else if(bus_data.adc_reading > MAX_ADC_VAL)
 		{
-			bus_data.pedal = 100;
+			bus_data.pedal = 100.0;
 		}
 		else
 		{

@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2022-04-11
  *
- * @copyright Copyright (c) 2021
+ * @copyright Copyright (c) 2022
  *
  */
 
@@ -37,7 +37,7 @@ typedef struct bus1
 	hm_state_t 				hm_state;			// estado de hombre muerto
 
 	uint32_t 				adc_reading;		// lectura de ADC pedal
-	uint32_t 				pedal;				// valor de pedal convertido
+	float 					pedal;				// valor de pedal convertido
 
 	/* Estructuras con variables decodificadas de los módulos */
 	rx_control_vars_t		Rx_Control;

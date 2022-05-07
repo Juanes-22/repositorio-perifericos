@@ -1,8 +1,12 @@
-/*
- * pedal.h
+/**
+ * @file pedal.c
+ * @author Subgrupo Control y Periféricos - Elektron Motorsports
+ * @brief Archivo header para pedal.h
+ * @version 0.1
+ * @date 2022-04-12
  *
- *  Created on: 18/04/2022
- *      Author: Juan
+ * @copyright Copyright (c) 2022
+ *
  */
 
 #ifndef _PEDAL_H_

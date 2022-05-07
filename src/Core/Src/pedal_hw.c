@@ -1,8 +1,12 @@
-/*
- * pedal_hw.c
+/**
+ * @file pedal_hw.c
+ * @author Subgrupo Control y Periféricos - Elektron Motorsports
+ * @brief Código hardware de pedal
+ * @version 0.1
+ * @date 2022-04-12
  *
- *  Created on: 24/04/2022
- *      Author: Juan
+ * @copyright Copyright (c) 2022
+ *
  */
 
 /***********************************************************************************************************************

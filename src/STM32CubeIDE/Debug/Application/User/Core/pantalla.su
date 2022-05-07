@@ -1,2 +1,2 @@
-pantalla.c:36:6:PANTALLA_Process	8	static
-pantalla.c:45:13:PANTALLA_Demo	96	static
+pantalla.c:44:6:PANTALLA_Process	8	static
+pantalla.c:53:13:PANTALLA_Demo	96	static

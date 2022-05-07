@@ -1,9 +1,12 @@
-
-/*
- * botones_hw.h
+/**
+ * @file botones_hw.h
+ * @author Subgrupo Control y Periféricos - Elektron Motorsports
+ * @brief Archivo header para botones_hw.c
+ * @version 0.1
+ * @date 2022-04-16
  *
- *  Created on: 24/04/2022
- *      Author: Juan
+ * @copyright Copyright (c) 2022
+ *
  */
 
 #ifndef _BOTONES_HW_H_

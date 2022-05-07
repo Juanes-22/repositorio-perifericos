@@ -35,8 +35,6 @@ extern "C" {
 /* Include BSP (board support package) */
 #include "stm32f4xx_perifericos.h"
 
-/* Global variables ---------------------------------------------------------*/
-
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

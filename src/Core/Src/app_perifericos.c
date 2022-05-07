@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2022-04-20
  *
- * @copyright Copyright (c) 2021
+ * @copyright Copyright (c) 2022
  *
  */
 
@@ -44,10 +44,10 @@ enum App_States
 };
 
 /** @brief Estado de la máquina de estados */
-uint8_t app_state = kWAITING_ECHO;
+static uint8_t app_state = kWAITING_ECHO;
 
 /** Para blink LED de estado kWAITING_ECHO */
-uint32_t blink_tickstart;
+static uint32_t blink_tickstart;
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -116,6 +116,7 @@ void MX_APP_Process(void)
 				HAL_Delay(500);
 
 				/* Send perifericos_ok MODULE_OK response */
+				bus_can_output.perifericos_ok = CAN_VALUE_MODULE_OK;
 				CAN_APP_Send_BusData(&bus_can_output);
 
 				/* Indicate that start up has finished */
@@ -141,9 +142,6 @@ void MX_APP_Process(void)
 
 	    CAN_APP_Process();
 
-		break;
-
-	default:
 		break;
 	}
 }
