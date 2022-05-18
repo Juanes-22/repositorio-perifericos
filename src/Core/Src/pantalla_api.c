@@ -51,37 +51,43 @@ void PANTALLA_API_SendtoGauge (char *obj, uint16_t value, UART_HandleTypeDef hua
 
 void PANTALLA_API_SendtoNum(char *obj, uint16_t value,UART_HandleTypeDef huart)
 {
-    char buf[30];
-    int len = sprintf(buf, "%s=%u", obj, value);
+	char buf[30];
 
-    HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);
-    HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
+	int len = sprintf (buf,"%s=%u",obj,value);
+
+	HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);
+
+	HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
 }
 
 void PANTALLA_API_SendtoTxt(char *obj, uint16_t value,UART_HandleTypeDef huart)
 {
-    char buf[30];
-    int len;
+	char buf[30];
+	int len;
 
-    if (strcmp(obj, "bat_level.txt") == 0)
-    {
-        len = sprintf(buf, "%s=\"%u\"%%", obj, value);
-    }
-    else if (strcmp(obj, "power.txt") == 0)
-    {
-        len = sprintf(buf, "%s=\"%u\"W", obj, value);
-    }
-    else if (strcmp(obj, "bat_voltage") == 0)
-    {
-        len = sprintf(buf, "%s=\"%u\"V", obj, value);
-    }
-    else
-    {
-        len = sprintf(buf, "%s=\"%u\"", obj, value);
-    }
 
-    HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);
-    HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
+	if(strcmp("bat_level.txt",obj)==0){
+
+		len = sprintf (buf,"%s=\"%u%%\"",obj,value);
+
+	}else if(strcmp("power.txt",obj)==0){
+
+		len = sprintf (buf,"%s=\"%u W\"",obj,value);
+
+	}else if(strcmp("bat_voltage.txt",obj)==0){
+
+		len = sprintf (buf,"%s=\"%u V\"",obj,value);
+
+	}else{
+		len = sprintf (buf,"%s=\"%u\"",obj,value);
+	}
+
+
+	HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);
+
+
+	HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
+
 }
 
 void PANTALLA_API_SendtoPB(char *obj, uint16_t value,UART_HandleTypeDef huart)
@@ -143,7 +149,7 @@ void PANTALLA_API_SendtoImage(char *obj, uint16_t value,UART_HandleTypeDef huart
             pic = 33; // warning
             len = sprintf(buf, "%s=%u", obj, pic);
         }
-        else if (value == 2)
+        else if (value == 0)
         {
             pic = 32; // no warning
             len = sprintf(buf, "%s=%u", obj, pic);

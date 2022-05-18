@@ -137,13 +137,13 @@ static void BOTONES_Update_HM_State(void)
 	/* Ambos pulsadores de hombre muerto no presionados */
 	if(bus_data.btn_hm1 == kBTN_NOT_PRESSED && bus_data.btn_hm2 == kBTN_NOT_PRESSED)
 	{
-		bus_data.hm_state = kHOMBRE_MUERTO_OFF;
+		bus_data.hm_state = kHOMBRE_MUERTO_ON;
 	}
 
 	/* Cualquiera de los pulsadores de hombre muerto presionados */
 	else if(bus_data.btn_hm1 == kBTN_PRESSED || bus_data.btn_hm2 == kBTN_PRESSED)
 	{
-		bus_data.hm_state = kHOMBRE_MUERTO_ON;
+		bus_data.hm_state = kHOMBRE_MUERTO_OFF;
 	}
 }
 

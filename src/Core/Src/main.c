@@ -18,10 +18,16 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "can.h"
+#include "dma.h"
+#include "tim.h"
+#include "usart.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "app_perifericos.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -81,7 +87,22 @@ int main(void)
 
   /* USER CODE END SysInit */
 
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_ADC1_Init();
+  MX_CAN2_Init();
+  MX_DMA_Init();
+  MX_TIM2_Init();
+  MX_TIM7_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
+
+  /* Turn driving modes buttons LEDs on */
+  HAL_GPIO_TogglePin(LED_ECO_GPIO_Port, LED_ECO_Pin);
+  HAL_GPIO_TogglePin(LED_NORMAL_GPIO_Port, LED_NORMAL_Pin);
+  HAL_GPIO_TogglePin(LED_SPORT_GPIO_Port, LED_SPORT_Pin);
+
+  MX_APP_Init();
 
   /* USER CODE END 2 */
 
@@ -92,6 +113,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+	MX_APP_Process();
   }
   /* USER CODE END 3 */
 }

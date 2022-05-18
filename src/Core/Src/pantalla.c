@@ -19,9 +19,16 @@
  * Private macros
  **********************************************************************************************************************/
 
+/* Intervalo de tiempo de transmisión serial a pantalla Nextion en ms */
+#define DISPLAY_TRANSMIT_INTERVAL		100U
+
 /***********************************************************************************************************************
  * Private variables definitions
  **********************************************************************************************************************/
+
+int value;
+
+uint32_t tickstart;
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -52,35 +59,49 @@ void PANTALLA_Process(void)
 
 static void PANTALLA_Demo(void)
 {
-    int value = 0;
-    int img;
+	/* Ticks for serial transmit to Nextion display */
+	tickstart = HAL_GetTick();
 
-    for (value = 0; value >= 100; value++)
-    {
-        if (value >= 0 && value <= 33)
-        {
-            img = 1;
-        }
-        else if (value > 33 && value <= 66)
-        {
-            img = 2;
-        }
-        else if (value > 66 && value <= 100)
-        {
-            img = 3;
-        }
+	if( (HAL_GetTick() - tickstart) > DISPLAY_TRANSMIT_INTERVAL )
+	{
+		/* hombre muerto */
+		if(bus_data.hm_state == kHOMBRE_MUERTO_ON)
+		{
+			PANTALLA_API_SendtoNum("is_warning.val", 1, huart6);
+		}
+		else if(bus_data.hm_state == kHOMBRE_MUERTO_OFF)
+		{
+			PANTALLA_API_SendtoNum("is_warning.val", 0, huart6);
+		}
 
-        PANTALLA_API_SendtoImage("bat_icon.pic", value, huart6);
-        PANTALLA_API_SendtoImage("driving_mode.pic", img, huart6);
-        PANTALLA_API_SendtoImage("warning.pic", img, huart6);
+		/* modo de manejo */
+		if(bus_data.btn_modo_manejo == kBTN_ECO)
+		{
+			PANTALLA_API_SendtoImage("driving_mode.pic", 1, huart6);
+		}
+		else if(bus_data.btn_modo_manejo == kBTN_NORMAL)
+		{
+			PANTALLA_API_SendtoImage("driving_mode.pic", 2, huart6);
+		}
+		else if(bus_data.btn_modo_manejo == kBTN_SPORT)
+		{
+			PANTALLA_API_SendtoImage("driving_mode.pic", 3, huart6);
+		}
 
-        PANTALLA_API_SendtoTxt("bat_level.txt", value, huart6);
-        PANTALLA_API_SendtoTxt("bat_voltage.txt", value, huart6);
-        PANTALLA_API_SendtoTxt("power.txt", value, huart6);
-        PANTALLA_API_SendtoTxt("speed.txt", value, huart6);
+		/* velocidad */
+		value = (int) bus_data.pedal;
 
-        PANTALLA_API_SendtoPB("speed_bar", value, huart6);
+		if(value == 100)
+		{
+			PANTALLA_API_SendtoTxt("speed.txt", 99, huart6);
+		}
+		else
+		{
+			PANTALLA_API_SendtoTxt("speed.txt", value, huart6);
+			PANTALLA_API_SendtoPB("speed_bar.val", value, huart6);
+		}
 
-        HAL_Delay(40);
-    }
+		/* Reset ticks */
+		tickstart = HAL_GetTick();
+	}
 }

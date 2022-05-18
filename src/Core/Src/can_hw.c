@@ -1,7 +1,7 @@
 /**
  * @file can_hw.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Código hardware de CAN
+ * @brief Código configuración hardware CAN
  * @version 0.1
  * @date 2022-04-11
  *

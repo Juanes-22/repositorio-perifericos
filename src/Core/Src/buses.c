@@ -38,4 +38,4 @@ typedef_bus1_t bus_data =
 typedef_bus2_t bus_can_output = { .perifericos_ok = CAN_VALUE_MODULE_OK };
 
 /* Inicialización de bus de recepción CAN (bus 3) */
-typedef_bus3_t bus_can_input = { .control_ok = CAN_VALUE_MODULE_ERROR };
+typedef_bus3_t bus_can_input = { .control_ok = CAN_VALUE_MODULE_OK };
