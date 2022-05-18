@@ -115,8 +115,9 @@ void MX_APP_Process(void)
 			{
 				HAL_Delay(500);
 
-				/* Send perifericos_ok MODULE_OK response */
 				bus_can_output.perifericos_ok = CAN_VALUE_MODULE_OK;
+
+				/* Send perifericos_ok MODULE_OK response */
 				//CAN_APP_Send_BusData(&bus_can_output);
 
 				/* Indicate that start up has finished */
@@ -141,6 +142,13 @@ void MX_APP_Process(void)
 	    INDICATORS_Process();
 
 	    DECODE_DATA_Process();
+
+	    if (flag_rx_can == CAN_MSG_RECEIVED) {
+
+	    	flag_rx_can = CAN_MSG_NOT_RECEIVED;
+
+	    	BSP_LED_Toggle(LED2);
+	    }
 
 	    //CAN_APP_Process();
 

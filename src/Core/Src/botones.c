@@ -55,10 +55,10 @@ void BOTONES_Process(void)
 
 	BOTONES_Update_HM_State();									// actualice estado de hombre muerto en bus de datos
 
-	BOTONES_Send_HM_State( bus_data.hm_state, 
+	BOTONES_Send_HM_State( 	bus_data.hm_state,
 							&bus_can_output);					// envie estado hombre muerto a bus de salida CAN
 
-	BOTONES_Send_DrivingMode_Btn( bus_data.btn_modo_manejo, 
+	BOTONES_Send_DrivingMode_Btn( 	bus_data.btn_modo_manejo,
 									&bus_can_output);			// envie modo de manejo presionado a bus de salida CAN
 }
 

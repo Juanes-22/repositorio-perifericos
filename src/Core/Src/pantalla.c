@@ -26,9 +26,9 @@
  * Private variables definitions
  **********************************************************************************************************************/
 
-int value;
-
 uint32_t tickstart;
+
+int value = 0;
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -64,7 +64,7 @@ static void PANTALLA_Demo(void)
 
 	if( (HAL_GetTick() - tickstart) > DISPLAY_TRANSMIT_INTERVAL )
 	{
-		/* hombre muerto */
+		/* Hombre muerto */
 		if(bus_data.hm_state == kHOMBRE_MUERTO_ON)
 		{
 			PANTALLA_API_SendtoNum("is_warning.val", 1, huart6);
@@ -74,7 +74,7 @@ static void PANTALLA_Demo(void)
 			PANTALLA_API_SendtoNum("is_warning.val", 0, huart6);
 		}
 
-		/* modo de manejo */
+		/* Modo de manejo */
 		if(bus_data.btn_modo_manejo == kBTN_ECO)
 		{
 			PANTALLA_API_SendtoImage("driving_mode.pic", 1, huart6);
@@ -88,7 +88,7 @@ static void PANTALLA_Demo(void)
 			PANTALLA_API_SendtoImage("driving_mode.pic", 3, huart6);
 		}
 
-		/* velocidad */
+		/* Velocidad */
 		value = (int) bus_data.pedal;
 
 		if(value == 100)
