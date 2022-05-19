@@ -135,11 +135,6 @@ void CAN_APP_Send_BusData(typedef_bus2_t *bus_can_output)
 /* Guardar mensaje CAN recibido en bus de entrada CAN */
 static void CAN_APP_Store_ReceivedMessage(void)
 {
-	if(CAN_API_Read_Message(&can_obj) != CAN_STATUS_OK)
-	{
-		Error_Handler();
-	}
-
 	/* Según standard identifier que se recibió, guarda dato en variables de bus de recepción CAN */
 	switch(can_obj.Frame.id)
 	{
