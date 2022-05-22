@@ -26,7 +26,7 @@ static GPIO_TypeDef*  LED_PORT[LEDn] = {LED1_GPIO_PORT, LED2_GPIO_PORT, LED3_GPI
 static const uint16_t LED_PIN[LEDn] = {LED1_GPIO_PIN, LED2_GPIO_PIN, LED3_GPIO_PIN};
 
 /* @brief Board BUZZER TIM handle */
-static TIM_HandleTypeDef BUZZER_htim;
+static TIM_HandleTypeDef htim_buzzer;
 
 /***********************************************************************************************************************
  * Public functions implementation
@@ -40,48 +40,52 @@ static TIM_HandleTypeDef BUZZER_htim;
  */
 int32_t BSP_BUZZER_Init(void)
 {
-    TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-    TIM_OC_InitTypeDef sConfigOC = {0};
+	TIM_MasterConfigTypeDef sMasterConfig = {0};
+	TIM_OC_InitTypeDef sConfigOC = {0};
 
 	/* Configure the Buzzer PWM Timer */
-    BUZZER_htim.Instance = BUZZER_PWM_TIM_INSTANCE;
-    BUZZER_htim.Init.Prescaler = 0;
-    BUZZER_htim.Init.CounterMode = TIM_COUNTERMODE_UP;
-    BUZZER_htim.Init.Period = 39062;
-    BUZZER_htim.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    BUZZER_htim.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-    HAL_TIM_Base_Init(&BUZZER_htim);
+	htim_buzzer.Instance = BUZZER_PWM_TIM_INSTANCE;
+	htim_buzzer.Init.Prescaler = 80-1;
+	htim_buzzer.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim_buzzer.Init.Period = 250-1;
+	htim_buzzer.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim_buzzer.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 
-    BUZZER_TIM_CLK_ENABLE();	// TIM peripheral clock enable
+	/* TIM peripheral clock enable */
+	BUZZER_TIM_CLK_ENABLE();
 
-    sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-    HAL_TIM_ConfigClockSource(&BUZZER_htim, &sClockSourceConfig);
+	HAL_TIM_PWM_Init(&htim_buzzer);
 
-    HAL_TIM_PWM_Init(&BUZZER_htim);
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
 
-    sConfigOC.OCMode = TIM_OCMODE_PWM1;
-    sConfigOC.Pulse = 3906;
-    sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-    sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-    HAL_TIM_PWM_ConfigChannel(&BUZZER_htim, &sConfigOC, BUZZER_PWM_TIM_CHANNEL);
+	HAL_TIMEx_MasterConfigSynchronization(&htim_buzzer, &sMasterConfig);
 
-    /* HAL_TIM_MspPostInit:  */
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = 0;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
 
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
+	HAL_TIM_PWM_ConfigChannel(&htim_buzzer, &sConfigOC, TIM_CHANNEL_3);
 
-    BUZZER_GPIO_CLK_ENABLE();
-    /** BUZZER GPIO Configuration
-        PA2     ------> TIM9_CH1
-     */
-    GPIO_InitStruct.Pin = BUZZER_GPIO_PIN;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF3_TIM9;
+	/* HAL_TIM_MspPostInit function  */
 
-    HAL_GPIO_Init(BUZZER_GPIO_PORT, &GPIO_InitStruct);
+	GPIO_InitTypeDef GPIO_InitStruct = {0};
 
-    return BSP_ERROR_NONE;
+	BUZZER_GPIO_CLK_ENABLE();
+
+	/** BUZZER GPIO Configuration
+        PA2     ------> TIM2_CH3
+	 */
+	GPIO_InitStruct.Pin = BUZZER_GPIO_PIN;
+	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
+
+	HAL_GPIO_Init(BUZZER_GPIO_PORT, &GPIO_InitStruct);
+
+	return BSP_ERROR_NONE;
 }
 
 /**
@@ -93,11 +97,14 @@ int32_t BSP_BUZZER_Init(void)
  */
 int32_t BSP_BUZZER_DeInit(void)
 {
-    /* Turn off BUZZER */
-	HAL_TIM_PWM_Stop(&BUZZER_htim, BUZZER_PWM_TIM_CHANNEL);
+    /* TIM peripheral clock disable */
+	BUZZER_TIM_CLK_DISABLE();
 
-    /* DeInit the BUZZER PWM timer */
-    HAL_TIM_PWM_DeInit(&BUZZER_htim);
+	/* Stop PWM */
+	HAL_TIM_PWM_Stop(&htim_buzzer, BUZZER_PWM_TIM_CHANNEL);
+
+    /* DeInit PWM */
+    HAL_TIM_PWM_DeInit(&htim_buzzer);
 
     return BSP_ERROR_NONE;
 }
@@ -110,7 +117,11 @@ int32_t BSP_BUZZER_DeInit(void)
  */
 int32_t BSP_BUZZER_On(void)
 {
-	HAL_TIM_PWM_Start(&BUZZER_htim, TIM_CHANNEL_1);
+	/* Configure Duty Cycle */
+	BUZZER_PWM_TIM_INSTANCE->CCR3=125;
+
+	/* Start PWM */
+	HAL_TIM_PWM_Start(&htim_buzzer, BUZZER_PWM_TIM_CHANNEL);
 
     return BSP_ERROR_NONE;
 }
@@ -123,7 +134,8 @@ int32_t BSP_BUZZER_On(void)
  */
 int32_t BSP_BUZZER_Off(void)
 {
-    HAL_TIM_PWM_Stop(&BUZZER_htim, TIM_CHANNEL_1);
+	/* Stop PWM */
+    HAL_TIM_PWM_Stop(&htim_buzzer, BUZZER_PWM_TIM_CHANNEL);
 
     return BSP_ERROR_NONE;
 }

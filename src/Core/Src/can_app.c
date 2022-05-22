@@ -19,6 +19,12 @@
  * Private macros
  **********************************************************************************************************************/
 
+/* CAN number of messages to transmit */
+#define CAN_NUM_OF_MSGS				4
+
+/* CAN messages transmission interval in ms */
+#define CAN_TRANSMIT_INTERVAL_MS	100
+
 /***********************************************************************************************************************
  * Private variables definitions
  **********************************************************************************************************************/
@@ -83,48 +89,31 @@ void CAN_APP_Process(void)
  */
 void CAN_APP_Send_BusData(typedef_bus2_t *bus_can_output)
 {
-	/* ---------------- Send pedal ----------------- */
+	uint32_t can_ids_array[CAN_NUM_OF_MSGS] = { CAN_ID_PEDAL,
+												CAN_ID_HOMBRE_MUERTO,
+												CAN_ID_BOTONES_CAMBIO_ESTADO,
+												CAN_ID_PERIFERICOS_OK,
+												};
 
-	can_obj.Frame.id = CAN_ID_PEDAL;
-	can_obj.Frame.payload_length = 1;
-	can_obj.Frame.payload_buff[0] = bus_can_output->pedal;
+	uint8_t can_values_array[CAN_NUM_OF_MSGS] = { 	bus_can_output->pedal,
+													bus_can_output->hombre_muerto,
+													bus_can_output->botones_cambio_estado,
+													bus_can_output->perifericos_ok,
+													};
 
-	if( CAN_API_Send_Message(&can_obj) != CAN_STATUS_OK )
+	/* Send bus variables */
+	for (int i=0; i<CAN_NUM_OF_MSGS; i++)
 	{
-		Error_Handler();
-	}
+		can_obj.Frame.id = can_ids_array[i];
+		can_obj.Frame.payload_length = 1;
+		can_obj.Frame.payload_buff[0] = can_values_array[i];
 
-	/* ------------- Send hombre_muerto ------------- */
+		if( CAN_API_Send_Message(&can_obj) != CAN_STATUS_OK )
+		{
+			Error_Handler();
+		}
 
-	can_obj.Frame.id = CAN_ID_HOMBRE_MUERTO;
-	can_obj.Frame.payload_length = 1;
-	can_obj.Frame.payload_buff[0] = bus_can_output->hombre_muerto;
-
-	if( CAN_API_Send_Message(&can_obj) != CAN_STATUS_OK )
-	{
-		Error_Handler();
-	}
-
-	/* --------- Send botones_cambio_estado --------- */
-
-	can_obj.Frame.id = CAN_ID_BOTONES_CAMBIO_ESTADO;
-	can_obj.Frame.payload_length = 1;
-	can_obj.Frame.payload_buff[0] = bus_can_output->botones_cambio_estado;
-
-	if( CAN_API_Send_Message(&can_obj) != CAN_STATUS_OK )
-	{
-		Error_Handler();
-	}
-
-	/* ------------ Send perifericos_ok ------------ */
-
-	can_obj.Frame.id = CAN_ID_PERIFERICOS_OK;
-	can_obj.Frame.payload_length = 1;
-	can_obj.Frame.payload_buff[0] = bus_can_output->perifericos_ok;
-
-	if( CAN_API_Send_Message(&can_obj) != CAN_STATUS_OK )
-	{
-		Error_Handler();
+		HAL_Delay(CAN_TRANSMIT_INTERVAL_MS);
 	}
 }
 

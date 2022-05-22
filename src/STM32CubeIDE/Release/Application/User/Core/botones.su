@@ -1,0 +1,2 @@
+botones.c:52:6:BOTONES_Process	8	static
+botones.c:78:6:HAL_GPIO_EXTI_Callback	0	static

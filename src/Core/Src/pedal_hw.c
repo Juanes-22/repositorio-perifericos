@@ -1,7 +1,7 @@
 /**
  * @file pedal_hw.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Código hardware de pedal
+ * @brief Configuración hardware de pedal
  * @version 0.1
  * @date 2022-04-12
  *
@@ -46,13 +46,13 @@ void PEDAL_HW_Init(void)
 	MX_ADC1_Init();
 
 	/* Initialize time base timer for ADC triggering */
-	MX_TIM2_Init();
+	MX_TIM3_Init();
 
 	/* Start ADC with DMA */
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buf, ADC_BUF_LEN);
 
 	/* Start time base trigger ADC timer */
-	HAL_TIM_Base_Start(&htim2);
+	HAL_TIM_Base_Start(&htim3);
 }
 
 /***********************************************************************************************************************

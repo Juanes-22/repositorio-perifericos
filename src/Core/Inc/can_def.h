@@ -1,7 +1,7 @@
 /**
  * @file can_def.h
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Definiciones para IDs y valores de CAN
+ * @brief Definiciones para IDs y valores de CAN para Periféricos
  * @version 0.1
  * @date 2022-04-25
  *

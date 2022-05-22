@@ -1,0 +1,4 @@
+can_wrapper.c:49:14:CAN_Wrapper_Init	8	static
+can_wrapper.c:97:14:CAN_Wrapper_TransmitData	16	static
+can_wrapper.c:130:14:CAN_Wrapper_ReceiveData	16	static
+can_wrapper.c:152:14:CAN_Wrapper_DataCount	0	static

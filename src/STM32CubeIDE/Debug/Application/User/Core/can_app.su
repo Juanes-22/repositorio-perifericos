@@ -1,3 +1,3 @@
-can_app.c:48:6:CAN_APP_Process	8	static
-can_app.c:84:6:CAN_APP_Send_BusData	16	static
-can_app.c:136:13:CAN_APP_Store_ReceivedMessage	8	static
+can_app.c:54:6:CAN_APP_Process	8	static
+can_app.c:90:6:CAN_APP_Send_BusData	48	static
+can_app.c:125:13:CAN_APP_Store_ReceivedMessage	4	static

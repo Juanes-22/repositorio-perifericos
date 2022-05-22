@@ -1,7 +1,7 @@
 /**
  * @file botones.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Manejo de botones de modos de manejo y hombre muerto
+ * @brief Código aplicativo para manejo de botones de modos de manejo y hombre muerto
  * @version 0.1
  * @date 2022-04-16
  *

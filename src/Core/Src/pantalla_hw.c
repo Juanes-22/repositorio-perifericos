@@ -1,7 +1,7 @@
 /**
  * @file pantalla_hw.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Código hardware de pantalla
+ * @brief Configuración hardware de pantalla
  * @version 0.1
  * @date 2022-04-12
  *

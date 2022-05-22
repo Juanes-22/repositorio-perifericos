@@ -1,0 +1,4 @@
+can_api.c:42:14:CAN_API_Init	4	static
+can_api.c:77:14:CAN_API_Send_Message	16	static
+can_api.c:100:14:CAN_API_Read_Message	0	static
+can_api.c:118:14:CAN_API_Get_Message_Count	0	static

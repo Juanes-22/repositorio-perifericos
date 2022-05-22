@@ -1,7 +1,7 @@
 /**
  * @file indicators.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Generación de indicadores de Periféricos
+ * @brief Generación de indicadores de tarjeta Periféricos
  * @version 0.1
  * @date 2022-04-25
  *
@@ -104,6 +104,8 @@ void INDICATORS_Process(void)
 	//BSP_LED_Off(LED1);
 	//BSP_LED_Off(LED2);
 	//BSP_LED_Off(LED3);
+
+	asm("nop");
 }
 
 /***********************************************************************************************************************

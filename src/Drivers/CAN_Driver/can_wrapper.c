@@ -112,7 +112,7 @@ can_status_t CAN_Wrapper_TransmitData(uint32_t id, uint8_t ide, uint8_t rtr, uin
 	/* Start CAN transmission process */
 	if (HAL_CAN_AddTxMessage(&hcan2, &TxHeader, data, &TxMailbox) != HAL_OK)
 	{
-		Error_Handler();						// transmission request Error
+		Error_Handler();
 	}
 
 	return CAN_STATUS_OK;

@@ -1,7 +1,7 @@
 /**
  * @file pantalla.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Envío de datos a pantalla Nextion
+ * @brief Código aplicativo para envío de datos a pantalla Nextion
  * @version 0.1
  * @date 2022-04-12
  *

@@ -33,7 +33,7 @@ uint8_t Cmd_End[3] = {0xFF, 0xFF, 0xFF}; // command end sequence
  * Public functions implementation
  **********************************************************************************************************************/
 
-void PANTALLA_API_SendtoGauge (char *obj, uint16_t value, UART_HandleTypeDef huart)
+void PANTALLA_API_SendtoGauge(char *obj, uint16_t value, UART_HandleTypeDef huart)
 {
     char buf[30];
     value += 180; // 0 error
@@ -52,11 +52,9 @@ void PANTALLA_API_SendtoGauge (char *obj, uint16_t value, UART_HandleTypeDef hua
 void PANTALLA_API_SendtoNum(char *obj, uint16_t value,UART_HandleTypeDef huart)
 {
 	char buf[30];
-
 	int len = sprintf (buf,"%s=%u",obj,value);
 
 	HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);
-
 	HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
 }
 
@@ -64,7 +62,6 @@ void PANTALLA_API_SendtoTxt(char *obj, uint16_t value,UART_HandleTypeDef huart)
 {
 	char buf[30];
 	int len;
-
 
 	if(strcmp("bat_level.txt",obj)==0){
 
@@ -82,18 +79,13 @@ void PANTALLA_API_SendtoTxt(char *obj, uint16_t value,UART_HandleTypeDef huart)
 		len = sprintf (buf,"%s=\"%u\"",obj,value);
 	}
 
-
 	HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);
-
-
 	HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
-
 }
 
 void PANTALLA_API_SendtoPB(char *obj, uint16_t value,UART_HandleTypeDef huart)
 {
     char buf[30];
-
     int len = sprintf(buf, "%s=%u", obj, value);
 
     HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);

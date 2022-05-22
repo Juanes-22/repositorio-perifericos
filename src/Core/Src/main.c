@@ -83,11 +83,6 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
 
-  /* Turn driving modes buttons LEDs on */
-  HAL_GPIO_TogglePin(LED_ECO_GPIO_Port, LED_ECO_Pin);
-  HAL_GPIO_TogglePin(LED_NORMAL_GPIO_Port, LED_NORMAL_Pin);
-  HAL_GPIO_TogglePin(LED_SPORT_GPIO_Port, LED_SPORT_Pin);
-
   MX_APP_Init();
 
   /* USER CODE END 2 */

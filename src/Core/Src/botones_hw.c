@@ -1,7 +1,7 @@
 /**
  * @file botones_hw.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Hardware botones de modos de manejo y hombre muerto
+ * @brief Configuración hardware botones de modos de manejo y hombre muerto
  * @version 0.1
  * @date 2022-04-16
  *
