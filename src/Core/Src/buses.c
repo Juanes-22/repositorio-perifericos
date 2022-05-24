@@ -22,20 +22,44 @@
 /* Inicialización de bus de datos (bus 1) */
 typedef_bus1_t bus_data =
 {
-		.btn_modo_manejo = kBTN_NONE,
-		.btn_hm1 = kBTN_NOT_PRESSED,
-		.btn_hm2 = kBTN_NOT_PRESSED,
-		.hm_state = kHOMBRE_MUERTO_OFF,
+	/* Variable botón modo de manejo presionado */
+	.btn_modo_manejo = kBTN_NONE,
 
-		.pedal = 0.0,
+	/* Variables botones hombre muerto */
+	.btn_hm1 = kBTN_NOT_PRESSED,
+	.btn_hm2 = kBTN_NOT_PRESSED,
 
-		.Rx_Control = {.control_ok = kMODULE_INFO_ERROR},
-		.Rx_Bms = {0},
+	/* Variable estado de hombre muerto */
+	.hm_state = kHOMBRE_MUERTO_OFF,
+
+	/* Variables lectura ADC pedal */
+	.adc_reading = 0U,
+	.pedal = 0.0,
+
+	/* Estructuras con variables decodificadas de los módulos */
+	.Rx_Control = 
+	{
+		.driving_mode = kDRIVING_MODE_NORMAL,
+		.failure = kFAILURE_CAUTION1,
+		.control_ok = kMODULE_INFO_ERROR
+	},
+	.Rx_Bms = {0},
 		.Rx_Inversor = {0}
 };
 
 /* Inicialización de bus de salida CAN (bus 2) */
-typedef_bus2_t bus_can_output = { .perifericos_ok = CAN_VALUE_MODULE_OK };
+typedef_bus2_t bus_can_output =
+{
+	.pedal = 0,
+	.hombre_muerto = CAN_VALUE_HM_PRESSED,
+	.botones_cambio_estado = CAN_VALUE_BTN_NONE,
+	.perifericos_ok = CAN_VALUE_MODULE_OK
+};
 
 /* Inicialización de bus de recepción CAN (bus 3) */
-typedef_bus3_t bus_can_input = { .control_ok = CAN_VALUE_MODULE_OK };
+typedef_bus3_t bus_can_input =
+{
+	.estado_manejo = CAN_VALUE_DRIVING_MODE_NORMAL,
+	.estado_falla = CAN_VALUE_FAILURE_CAUTION1,
+	.control_ok = CAN_VALUE_MODULE_OK
+};

@@ -23,10 +23,10 @@
  * Private variables definitions
  **********************************************************************************************************************/
 
-/* Buffer lectura ADC DMA */
+/** @brief Buffer lectura ADC DMA */
 uint16_t adc_buf[ADC_BUF_LEN];
 
-/** Bandera conversión ADC */
+/** @brief Bandera conversión ADC */
 adc_conv_status_t flag_adc = ADC_CONV_NOT_COMPLETED;
 
 /***********************************************************************************************************************

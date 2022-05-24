@@ -22,13 +22,13 @@
 /** @brief Bandera para ejecutar bloque de decodificación de datos */
 decode_status_t flag_decodificar = NO_DECODIFICA;
 
-/** @brief Puntero a estructura de tipo rx_control_vars_t que contiene los valores de las variables decodificadas de Control */
+/* Puntero a estructura de tipo rx_control_vars_t que contiene los valores de las variables decodificadas de Control */
 rx_control_vars_t* Rx_Control = &bus_data.Rx_Control;
 
-/** @brief Puntero a estructura de tipo rx_bms_vars_t que contiene los valores de las variables decodificadas del BMS */
+/* Puntero a estructura de tipo rx_bms_vars_t que contiene los valores de las variables decodificadas del BMS */
 rx_bms_vars_t* Rx_Bms = &bus_data.Rx_Bms;
 
-/** @brief Puntero a estructura de tipo rx_inversor_vars_t que contiene los valores de las variables decodificadas del inversor */
+/* Puntero a estructura de tipo rx_inversor_vars_t que contiene los valores de las variables decodificadas del inversor */
 rx_inversor_vars_t* Rx_Inversor = &bus_data.Rx_Inversor;
 
 /***********************************************************************************************************************
@@ -62,9 +62,7 @@ void DECODE_DATA_Process(void)
     if (flag_decodificar == DECODIFICA)
     {
     	DECODE_DATA_Decode_Control();
-
     	DECODE_DATA_Decode_Bms();
-
     	DECODE_DATA_Decode_Inversor();
 
         flag_decodificar = NO_DECODIFICA;
@@ -139,11 +137,8 @@ static void DECODE_DATA_Decode_Bms(void)
 {
 	/* Decodifica las variables analógicas de BMS */
     Rx_Bms->voltaje = (rx_var_t)bus_can_input.voltaje_bms;
-
     Rx_Bms->corriente = (rx_var_t)bus_can_input.corriente_bms;
-
     Rx_Bms->potencia = (rx_var_t)bus_can_input.potencia_bms;
-
     Rx_Bms->nivel_bateria = (rx_var_t)bus_can_input.nivel_bateria_bms;
 }
 

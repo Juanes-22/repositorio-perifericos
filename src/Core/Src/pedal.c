@@ -19,8 +19,10 @@
  * Private macros
  **********************************************************************************************************************/
 
-/** Valores que corresponden al 0 y 100 del pedal */
+/** @brief Valor que corresponde al 0 del pedal */
 #define MIN_ADC_VAL			66.0
+
+/** @brief Valor que corresponde al 100 del pedal */
 #define MAX_ADC_VAL			3231.0
 
 /***********************************************************************************************************************

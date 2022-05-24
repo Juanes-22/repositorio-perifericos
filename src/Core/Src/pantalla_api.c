@@ -23,7 +23,8 @@
  * Private variables definitions
  **********************************************************************************************************************/
 
-uint8_t Cmd_End[3] = {0xFF, 0xFF, 0xFF}; // command end sequence
+/** @brief Command end sequence */
+uint8_t Cmd_End[3] = {0xFF, 0xFF, 0xFF};
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -95,7 +96,7 @@ void PANTALLA_API_SendtoPB(char *obj, uint16_t value,UART_HandleTypeDef huart)
 void PANTALLA_API_SendtoImage(char *obj, uint16_t value,UART_HandleTypeDef huart){
 
     char buf[30];
-    int len;
+    int len = 0;
     int pic;
 
     if (strcmp(obj, "bat_icon.pic") == 0)
@@ -131,7 +132,6 @@ void PANTALLA_API_SendtoImage(char *obj, uint16_t value,UART_HandleTypeDef huart
         else if (value == 3)
         {
             pic = 25; // sport
-            len = sprintf(buf, "%s=%u", obj, pic);
         }
     }
     else if (strcmp(obj, "warning.pic") == 0)

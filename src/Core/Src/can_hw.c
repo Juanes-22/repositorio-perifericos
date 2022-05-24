@@ -23,16 +23,16 @@
  * Private variables definitions
  **********************************************************************************************************************/
 
-/* CAN object instance */
+/** @brief CAN object instance */
 CAN_t can_obj;
 
-/* Bandera mensaje recibido CAN */
+/** @brief Bandera mensaje recibido CAN */
 can_rx_status_t flag_rx_can = CAN_MSG_NOT_RECEIVED;
 
-/* Bandera transmisión CAN */
+/** @brief Bandera transmisión CAN */
 can_tx_status_t flag_tx_can = CAN_TX_READY;
 
-/* ID para prueba comunicación CAN */
+/** @brief ID para prueba comunicación CAN */
 uint8_t test_msg_id = 0x30;
 
 int i = 0;
@@ -48,14 +48,13 @@ int i = 0;
 void CAN_HW_Init(void)
 {
 	/* Inicializa CAN usando driver */
-	CAN_API_Init(	&can_obj,
-					STANDARD_FRAME,
-					NORMAL_MSG,
-					CAN_Wrapper_Init,
-					CAN_Wrapper_TransmitData,
-					CAN_Wrapper_ReceiveData,
-					CAN_Wrapper_DataCount
-				);
+	CAN_API_Init(&can_obj,
+				 STANDARD_FRAME,
+				 NORMAL_MSG,
+				 CAN_Wrapper_Init,
+				 CAN_Wrapper_TransmitData,
+				 CAN_Wrapper_ReceiveData,
+				 CAN_Wrapper_DataCount);
 }
 
 /***********************************************************************************************************************

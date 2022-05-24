@@ -1,7 +1,7 @@
 /**
  * @file types.h
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Declaraciones tipos de datos generales de la aplicación
+ * @brief Declaraciones tipos de datos generales
  * @version 0.1
  * @date 2022-04-11
  *

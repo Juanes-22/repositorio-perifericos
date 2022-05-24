@@ -29,15 +29,19 @@
  */
 typedef struct bus1
 {
+	/* Variable botón modo de manejo presionado */
+	btn_modo_manejo_t 		btn_modo_manejo;
 
-	btn_modo_manejo_t 		btn_modo_manejo;	// boton modo de manejo presionado
+	/* Variables botones hombre muerto */
+	btn_state_t 			btn_hm1;
+	btn_state_t 			btn_hm2;
 
-	btn_state_t 			btn_hm1;			// boton 1 hombre muerto
-	btn_state_t 			btn_hm2;			// boton 2 hombre muerto
-	hm_state_t 				hm_state;			// estado de hombre muerto
+	/* Variable estado de hombre muerto */
+	hm_state_t 				hm_state;
 
-	uint32_t 				adc_reading;		// lectura de ADC pedal
-	float 					pedal;				// valor de pedal convertido
+	/* Variables lectura ADC pedal */
+	uint32_t 				adc_reading;
+	float 					pedal;
 
 	/* Estructuras con variables decodificadas de los módulos */
 	rx_control_vars_t		Rx_Control;

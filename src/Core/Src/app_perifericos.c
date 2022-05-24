@@ -29,7 +29,7 @@
  * Private macros
  **********************************************************************************************************************/
 
-/** Duración de blink de LED de estado kWAITING_ECHO */
+/** Duración de blink de LED de estado kWAITING_ECHO en ms */
 #define BLINK_TIME              250U
 
 /***********************************************************************************************************************
@@ -95,7 +95,7 @@ void MX_APP_Process(void)
 	switch (app_state)
 	{
 
-	/* Estado esperando echo de Tarjeta de Control */
+	/* Estado esperando echo de tarjeta de Control */
 	case kWAITING_ECHO:
 
 		/* Ticks for the blinking of the LED */
@@ -111,6 +111,7 @@ void MX_APP_Process(void)
 				blink_tickstart = HAL_GetTick();
 			}
 
+			/* Si se recibe Control OK, Periféricos responde con OK y está listo */
 			if (bus_can_input.control_ok == CAN_VALUE_MODULE_OK)
 			{
 				HAL_Delay(500);
@@ -118,7 +119,7 @@ void MX_APP_Process(void)
 				bus_can_output.perifericos_ok = CAN_VALUE_MODULE_OK;
 
 				/* Send perifericos_ok MODULE_OK response */
-				//CAN_APP_Send_BusData(&bus_can_output);
+				CAN_APP_Send_BusData(&bus_can_output);
 
 				/* Indicate that start up has finished */
 				INDICATORS_Finish_StartUp();
@@ -130,8 +131,10 @@ void MX_APP_Process(void)
 		}
 		break;
 
-	/* Estado Tarjeta de Periféricos running */
+	/* Estado tarjeta de Periféricos running */
 	case kRUNNING:
+
+	    DECODE_DATA_Process();
 
 	    BOTONES_Process();
 
@@ -141,10 +144,8 @@ void MX_APP_Process(void)
 
 	    INDICATORS_Process();
 
-	    DECODE_DATA_Process();
-
-	    if (flag_rx_can == CAN_MSG_RECEIVED) {
-
+	    if (flag_rx_can == CAN_MSG_RECEIVED) 
+		{
 	    	flag_rx_can = CAN_MSG_NOT_RECEIVED;
 
 	    	BSP_LED_Toggle(LED2);

@@ -19,7 +19,7 @@
  * Private macros
  **********************************************************************************************************************/
 
-/* Intervalo de tiempo de transmisión serial a pantalla Nextion en ms */
+/** @brief Intervalo de tiempo de transmisión serial a pantalla Nextion en ms */
 #define DISPLAY_TRANSMIT_INTERVAL		100U
 
 /***********************************************************************************************************************
@@ -64,7 +64,7 @@ static void PANTALLA_Demo(void)
 
 	if( (HAL_GetTick() - tickstart) > DISPLAY_TRANSMIT_INTERVAL )
 	{
-		/* Hombre muerto */
+		/* Envía estado hombre muerto */
 		if(bus_data.hm_state == kHOMBRE_MUERTO_ON)
 		{
 			PANTALLA_API_SendtoNum("is_warning.val", 1, huart6);
@@ -74,7 +74,7 @@ static void PANTALLA_Demo(void)
 			PANTALLA_API_SendtoNum("is_warning.val", 0, huart6);
 		}
 
-		/* Modo de manejo */
+		/* Envía modo de manejo */
 		if(bus_data.btn_modo_manejo == kBTN_ECO)
 		{
 			PANTALLA_API_SendtoImage("driving_mode.pic", 1, huart6);
@@ -88,7 +88,7 @@ static void PANTALLA_Demo(void)
 			PANTALLA_API_SendtoImage("driving_mode.pic", 3, huart6);
 		}
 
-		/* Velocidad */
+		/* Envía velocidad */
 		value = (int) bus_data.pedal;
 
 		if(value == 100)

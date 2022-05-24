@@ -19,15 +19,24 @@
  * Private macros
  **********************************************************************************************************************/
 
-/* CAN number of messages to transmit */
-#define CAN_NUM_OF_MSGS				4
+/** @brief CAN number of messages to transmit */
+#define CAN_NUM_OF_MSGS					4
 
-/* CAN messages transmission interval in ms */
-#define CAN_TRANSMIT_INTERVAL_MS	100
+/** @brief CAN messages transmission interval in ms */
+#define CAN_TRANSMIT_INTERVAL_MS		100
 
 /***********************************************************************************************************************
  * Private variables definitions
  **********************************************************************************************************************/
+
+/** @brief Array of CAN message's IDs to transmit */
+static uint32_t can_ids_array[CAN_NUM_OF_MSGS] = {CAN_ID_PEDAL,
+                                                  CAN_ID_HOMBRE_MUERTO,
+                                                  CAN_ID_BOTONES_CAMBIO_ESTADO,
+                                                  CAN_ID_PERIFERICOS_OK};
+												  
+/** @brief Array of CAN message's value to transmit */
+static uint8_t can_values_array[CAN_NUM_OF_MSGS];
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -89,17 +98,10 @@ void CAN_APP_Process(void)
  */
 void CAN_APP_Send_BusData(typedef_bus2_t *bus_can_output)
 {
-	uint32_t can_ids_array[CAN_NUM_OF_MSGS] = { CAN_ID_PEDAL,
-												CAN_ID_HOMBRE_MUERTO,
-												CAN_ID_BOTONES_CAMBIO_ESTADO,
-												CAN_ID_PERIFERICOS_OK,
-												};
-
-	uint8_t can_values_array[CAN_NUM_OF_MSGS] = { 	bus_can_output->pedal,
-													bus_can_output->hombre_muerto,
-													bus_can_output->botones_cambio_estado,
-													bus_can_output->perifericos_ok,
-													};
+	can_values_array[0] = bus_can_output->pedal;
+	can_values_array[1] = bus_can_output->hombre_muerto;
+	can_values_array[2] = bus_can_output->botones_cambio_estado;
+	can_values_array[3] = bus_can_output->perifericos_ok;
 
 	/* Send bus variables */
 	for (int i=0; i<CAN_NUM_OF_MSGS; i++)
@@ -130,10 +132,10 @@ static void CAN_APP_Store_ReceivedMessage(void)
 
 	/* ------------------------ Control ----------------------- */
 
-	case CAN_ID_ESTADO_MANEJO:
+	case CAN_ID_CONTROL_ESTADO_MANEJO:
 		bus_can_input.estado_manejo = can_obj.Frame.payload_buff[0];
 		break;
-	case CAN_ID_ESTADO_FALLA:
+	case CAN_ID_CONTROL_ESTADO_FALLA:
 		bus_can_input.estado_falla = can_obj.Frame.payload_buff[0];
 		break;
 	case CAN_ID_CONTROL_OK:
@@ -142,23 +144,26 @@ static void CAN_APP_Store_ReceivedMessage(void)
 
 	/* ------------------------- BMS -------------------------- */
 
-	case CAN_ID_VOLTAJE_BMS:
+	case CAN_ID_BMS_VOLTAJE:
 		bus_can_input.voltaje_bms = can_obj.Frame.payload_buff[0];
 		break;
-	case CAN_ID_CORRIENTE_BMS:
+	case CAN_ID_BMS_CORRIENTE:
 		bus_can_input.corriente_bms = can_obj.Frame.payload_buff[0];
 		break;
-	case CAN_ID_POTENCIA_BMS:
+	case CAN_ID_BMS_POTENCIA:
 		bus_can_input.potencia_bms = can_obj.Frame.payload_buff[0];
 		break;
-	case CAN_ID_NIVEL_BATERIA_BMS:
+	case CAN_ID_BMS_NIVEL_BATERIA:
 		bus_can_input.nivel_bateria_bms = can_obj.Frame.payload_buff[0];
 		break;
 
 	/* ----------------------- Inversor ----------------------- */
 
-	case CAN_ID_VELOCIDAD_INVERSOR:
+	case CAN_ID_INVERSOR_VELOCIDAD:
 		bus_can_input.velocidad_inv = can_obj.Frame.payload_buff[0];
 		break;
+
+    default:
+        break;
 	}
 }
