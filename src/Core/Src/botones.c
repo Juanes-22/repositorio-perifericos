@@ -51,15 +51,19 @@ static void BOTONES_Send_DrivingMode_Btn(btn_modo_manejo_t to_send, typedef_bus2
  */
 void BOTONES_Process(void)
 {
-	BOTONES_Update_HM_Btns();									// actualice pulsadores de hombre muerto en bus de datos
+	/* actualice pulsadores de hombre muerto en bus de datos */
+	BOTONES_Update_HM_Btns();
 
-	BOTONES_Update_HM_State();									// actualice estado de hombre muerto en bus de datos
+	/* actualice estado de hombre muerto en bus de datos */
+	BOTONES_Update_HM_State();
 
-	BOTONES_Send_HM_State( 	bus_data.hm_state,
-							&bus_can_output);					// envie estado hombre muerto a bus de salida CAN
+	/* envie estado hombre muerto a bus de salida CAN */
+	BOTONES_Send_HM_State(bus_data.hm_state,
+						  &bus_can_output);
 
-	BOTONES_Send_DrivingMode_Btn( 	bus_data.btn_modo_manejo,
-									&bus_can_output);			// envie modo de manejo presionado a bus de salida CAN
+	/* envie modo de manejo presionado a bus de salida CAN */
+	BOTONES_Send_DrivingMode_Btn(bus_data.btn_modo_manejo,
+								 &bus_can_output);
 }
 
 /***********************************************************************************************************************
@@ -159,10 +163,10 @@ static void BOTONES_Send_HM_State(hm_state_t to_send, typedef_bus2_t* bus_can_ou
     switch (to_send)
     {
     case kHOMBRE_MUERTO_ON:
-        bus_can_output->hombre_muerto = CAN_VALUE_HM_PRESSED;
+        bus_can_output->hombre_muerto = CAN_VALUE_HOMBRE_MUERTO_ON;
         break;
     case kHOMBRE_MUERTO_OFF:
-        bus_can_output->hombre_muerto = CAN_VALUE_HM_NOT_PRESSED;
+        bus_can_output->hombre_muerto = CAN_VALUE_HOMBRE_MUERTO_OFF;
         break;
     default:
         break;

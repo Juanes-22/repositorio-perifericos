@@ -54,8 +54,8 @@
    
 /* ----------------------------- hombre_muerto ------------------------------- */
 
-#define CAN_VALUE_HM_PRESSED			            0x01
-#define CAN_VALUE_HM_NOT_PRESSED		            0x02
+#define CAN_VALUE_HOMBRE_MUERTO_ON                  0x00
+#define CAN_VALUE_HOMBRE_MUERTO_OFF                 0x01
 
 /* -------------------------- botones_cambio_estado -------------------------- */
 
