@@ -16,10 +16,14 @@
  * Included files
  **********************************************************************************************************************/
 
+/* Application includes */
 #include "botones_hw.h"
 #include "buses.h"
+
+/* CAN application includes */
 #include "can_def.h"
 
+/* STM32 HAL include */
 #include "main.h"
 
 /***********************************************************************************************************************
@@ -27,9 +31,9 @@
  **********************************************************************************************************************/
 
 /**
- * @brief Función principal de manejo de botones. Se manejan los
- * pulsadores de modo de manejo y los pulsadores de hombre muerto, y con ello
- * se modifican las variables en el bus de datos. Se envían a bus de salida CAN.
+ * @brief Función principal de manejo de botones. Se manejan los pulsadores de 
+ * modo de manejo y los pulsadores de hombre muerto, y con ello se modifican las 
+ * variables en el bus de datos. Se envían a bus de salida CAN.
  *
  * No es static, por lo que puede ser usada por otros archivos.
  *

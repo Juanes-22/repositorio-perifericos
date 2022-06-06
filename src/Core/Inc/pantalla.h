@@ -16,6 +16,7 @@
  * Included files
  **********************************************************************************************************************/
 
+/* Application includes */
 #include "pantalla_hw.h"
 #include "pantalla_api.h"
 #include "buses.h"

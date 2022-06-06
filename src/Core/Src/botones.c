@@ -40,9 +40,9 @@ static void BOTONES_Send_DrivingMode_Btn(btn_modo_manejo_t to_send, typedef_bus2
  **********************************************************************************************************************/
 
 /**
- * @brief Función principal de manejo de botones. Se manejan los
- * pulsadores de modo de manejo y los pulsadores de hombre muerto, y con ello
- * se modifican las variables en el bus de datos. Se envían a bus de salida CAN.
+ * @brief Función principal de manejo de botones. Se manejan los pulsadores de 
+ * modo de manejo y los pulsadores de hombre muerto, y con ello se modifican las 
+ * variables en el bus de datos. Se envían a bus de salida CAN.
  *
  * No es static, por lo que puede ser usada por otros archivos.
  *
@@ -51,19 +51,17 @@ static void BOTONES_Send_DrivingMode_Btn(btn_modo_manejo_t to_send, typedef_bus2
  */
 void BOTONES_Process(void)
 {
-	/* actualice pulsadores de hombre muerto en bus de datos */
+	/* Actualice pulsadores de hombre muerto en bus de datos */
 	BOTONES_Update_HM_Btns();
 
-	/* actualice estado de hombre muerto en bus de datos */
+	/* Actualice estado de hombre muerto en bus de datos */
 	BOTONES_Update_HM_State();
 
-	/* envie estado hombre muerto a bus de salida CAN */
-	BOTONES_Send_HM_State(bus_data.hm_state,
-						  &bus_can_output);
+	/* Envie estado hombre muerto a bus de salida CAN */
+	BOTONES_Send_HM_State(bus_data.hm_state, &bus_can_output);
 
-	/* envie modo de manejo presionado a bus de salida CAN */
-	BOTONES_Send_DrivingMode_Btn(bus_data.btn_modo_manejo,
-								 &bus_can_output);
+	/* Envie modo de manejo presionado a bus de salida CAN */
+	BOTONES_Send_DrivingMode_Btn(bus_data.btn_modo_manejo, &bus_can_output);
 }
 
 /***********************************************************************************************************************

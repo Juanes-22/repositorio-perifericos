@@ -26,9 +26,9 @@
  * Private variables definitions
  **********************************************************************************************************************/
 
-uint32_t tickstart;
+static uint32_t tickstart;
 
-int value = 0;
+static int value = 0;
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -62,7 +62,7 @@ static void PANTALLA_Demo(void)
 	/* Ticks for serial transmit to Nextion display */
 	tickstart = HAL_GetTick();
 
-	if( (HAL_GetTick() - tickstart) > DISPLAY_TRANSMIT_INTERVAL )
+	if((HAL_GetTick() - tickstart) > DISPLAY_TRANSMIT_INTERVAL)
 	{
 		/* Envía estado hombre muerto */
 		if(bus_data.hm_state == kHOMBRE_MUERTO_ON)

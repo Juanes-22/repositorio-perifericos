@@ -1,7 +1,7 @@
 /**
  * @file can_api.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Implementación capa de alto nivel CAN
+ * @brief Implementación driver capa de alto nivel CAN
  * @version 0.1
  * @date 2022-02-05
  *

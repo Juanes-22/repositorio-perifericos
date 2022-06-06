@@ -32,11 +32,6 @@ can_rx_status_t flag_rx_can = CAN_MSG_NOT_RECEIVED;
 /** @brief Bandera transmisión CAN */
 can_tx_status_t flag_tx_can = CAN_TX_READY;
 
-/** @brief ID para prueba comunicación CAN */
-uint8_t test_msg_id = 0x30;
-
-int i = 0;
-
 /***********************************************************************************************************************
  * Private functions prototypes
  **********************************************************************************************************************/
@@ -62,7 +57,7 @@ void CAN_HW_Init(void)
  **********************************************************************************************************************/
 
 /*
- *  Callback mensaje CAN recibido
+ * Callback mensaje CAN recibido
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan)
 {
@@ -83,9 +78,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
 	if(htim == &htim7)
 	{
-		/* Toggle LED 1 (Red LED) */
-		BSP_LED_Toggle(LED1);
-
 		/* The flag indicates that the callback was called */
 		flag_tx_can = CAN_TX_READY;
 	}

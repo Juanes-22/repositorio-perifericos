@@ -22,17 +22,14 @@
 /** @brief CAN number of messages to transmit */
 #define CAN_NUM_OF_MSGS					4
 
-/** @brief CAN messages transmission interval in ms */
-#define CAN_TRANSMIT_INTERVAL_MS		100
-
 /***********************************************************************************************************************
  * Private variables definitions
  **********************************************************************************************************************/
 
 /** @brief Array of CAN message's IDs to transmit */
-static uint32_t can_ids_array[CAN_NUM_OF_MSGS] = {CAN_ID_PEDAL,
-                                                  CAN_ID_HOMBRE_MUERTO,
-                                                  CAN_ID_BOTONES_CAMBIO_ESTADO,
+static uint32_t can_ids_array[CAN_NUM_OF_MSGS] = {CAN_ID_PERIFERICOS_PEDAL,
+                                                  CAN_ID_PERIFERICOS_HOMBRE_MUERTO,
+                                                  CAN_ID_PERIFERICOS_BOTONES_CAMBIO_ESTADO,
                                                   CAN_ID_PERIFERICOS_OK};
 												  
 /** @brief Array of CAN message's value to transmit */
@@ -42,14 +39,12 @@ static uint8_t can_values_array[CAN_NUM_OF_MSGS];
  * Private functions prototypes
  **********************************************************************************************************************/
 
-static void CAN_APP_Store_ReceivedMessage(void);
-
 /***********************************************************************************************************************
  * Public functions implementation
  **********************************************************************************************************************/
 
 /**
- * @brief Función principal de CAN a nivel de aplicación
+ * @brief Función principal de CAN a nivel de aplicación.
  *
  * Guarda mensaje CAN recibido en bus de entrada CAN cuando se activa
  * bandera de recepción. Envía datos de bus de salida CAN cuando se
@@ -62,28 +57,47 @@ static void CAN_APP_Store_ReceivedMessage(void);
  */
 void CAN_APP_Process(void)
 {
-	/* Recibió mensaje CAN */
-	if(flag_rx_can == CAN_MSG_RECEIVED)
-	{
-		/* Guarda mensaje CAN recibido en bus de entrada CAN */
-		CAN_APP_Store_ReceivedMessage();
+	/** Increments every time CAN TX flag is set as CAN_TX_READY */
+	static int can_tx_flag_count = 0;
 
-		/* Clear CAN received message flag */
-		flag_rx_can = CAN_MSG_NOT_RECEIVED;
+    /* Recibió mensaje CAN */
+    if (flag_rx_can == CAN_MSG_RECEIVED)
+    {
+		/* Toggle LED 2 (Green LED) */
+		BSP_LED_Toggle(LED2);
 
-		/* Activa bandera para decodificar */
-		flag_decodificar = DECODIFICA;
-	}
+        /* Guarda mensaje CAN recibido en bus de entrada CAN */
+        CAN_APP_Store_ReceivedMessage();
 
-	/* Hubo trigger para transmisión mensaje CAN */
-	if(flag_tx_can == CAN_TX_READY)
-	{
-		/* Envío de datos del bus de salida CAN a módulo CAN */
-		CAN_APP_Send_BusData(&bus_can_output);
+        /* Clear CAN received message flag */
+        flag_rx_can = CAN_MSG_NOT_RECEIVED;
 
-		/* Clear CAN TX ready flag */
-		flag_rx_can = CAN_TX_NOT_READY;
-	}
+        /* Activa bandera para decodificar */
+        flag_decodificar = DECODIFICA;
+    }
+
+    /* Hubo trigger para transmisión mensaje CAN */
+    if (flag_tx_can == CAN_TX_READY)
+    {
+    	/* Incrementa contador de bandera transmisión CAN */
+    	can_tx_flag_count++;
+
+    	/* Send bus variables every 500ms (CAN transmission timer is set to 100ms) */
+    	if(can_tx_flag_count % 5 == 0)
+    	{
+    		/* Toggle LED 1 (Red LED) */
+    		BSP_LED_Toggle(LED1);
+
+			/* Envío de datos del bus de salida CAN a módulo CAN */
+			CAN_APP_Send_BusData(&bus_can_output);
+
+			/* Better reset this to zero */
+			can_tx_flag_count = 0;
+    	}
+
+        /* Clear CAN TX ready flag */
+        flag_rx_can = CAN_TX_NOT_READY;
+    }
 }
 
 /**
@@ -98,35 +112,48 @@ void CAN_APP_Process(void)
  */
 void CAN_APP_Send_BusData(typedef_bus2_t *bus_can_output)
 {
+	/* Index for CAN values array and CAN IDs array */
+	static int i = 0;
+
+	/* Bus data into CAN values array */
 	can_values_array[0] = bus_can_output->pedal;
 	can_values_array[1] = bus_can_output->hombre_muerto;
 	can_values_array[2] = bus_can_output->botones_cambio_estado;
 	can_values_array[3] = bus_can_output->perifericos_ok;
 
-	/* Send bus variables */
-	for (int i=0; i<CAN_NUM_OF_MSGS; i++)
+	/* Index exceeds number of messages to transmit */
+	if(i >= CAN_NUM_OF_MSGS)
 	{
-		can_obj.Frame.id = can_ids_array[i];
-		can_obj.Frame.payload_length = 1;
-		can_obj.Frame.payload_buff[0] = can_values_array[i];
-
-		if( CAN_API_Send_Message(&can_obj) != CAN_STATUS_OK )
-		{
-			Error_Handler();
-		}
-
-		HAL_Delay(CAN_TRANSMIT_INTERVAL_MS);
+		i=0;
+		return;
 	}
+
+	/* Set up can_obj for message transmission */
+	can_obj.Frame.id = can_ids_array[i];
+	can_obj.Frame.payload_length = 1;
+	can_obj.Frame.payload_buff[0] = can_values_array[i];
+
+	/* Send message */
+	if (CAN_API_Send_Message(&can_obj) != CAN_STATUS_OK)
+	{
+		Error_Handler();
+	}
+
+	i++;
 }
 
-/***********************************************************************************************************************
- * Private functions implementation
- **********************************************************************************************************************/
-
-/* Guardar mensaje CAN recibido en bus de entrada CAN */
-static void CAN_APP_Store_ReceivedMessage(void)
+/**
+ * @brief Función guardar mensaje CAN recibido en bus de entrada CAN.
+ *
+ * Según standard identifier que se recibió, guarda dato en variables de bus de recepción CAN.
+ *
+ * No es static, por lo que puede ser usada por otros archivos.
+ *
+ * @param None
+ * @retval None
+ */
+void CAN_APP_Store_ReceivedMessage(void)
 {
-	/* Según standard identifier que se recibió, guarda dato en variables de bus de recepción CAN */
 	switch(can_obj.Frame.id)
 	{
 
@@ -167,3 +194,7 @@ static void CAN_APP_Store_ReceivedMessage(void)
         break;
 	}
 }
+
+/***********************************************************************************************************************
+ * Private functions implementation
+ **********************************************************************************************************************/

@@ -50,41 +50,48 @@ void PANTALLA_API_SendtoGauge(char *obj, uint16_t value, UART_HandleTypeDef huar
     HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
 }
 
-void PANTALLA_API_SendtoNum(char *obj, uint16_t value,UART_HandleTypeDef huart)
+void PANTALLA_API_SendtoNum(char *obj, uint16_t value, UART_HandleTypeDef huart)
 {
 	char buf[30];
-	int len = sprintf (buf,"%s=%u",obj,value);
+	int len = sprintf (buf,"%s=%u",obj, value);
 
 	HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);
 	HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
 }
 
-void PANTALLA_API_SendtoTxt(char *obj, uint16_t value,UART_HandleTypeDef huart)
+void PANTALLA_API_SendtoTxt(char *obj, uint16_t value, UART_HandleTypeDef huart)
 {
 	char buf[30];
 	int len;
 
-	if(strcmp("bat_level.txt",obj)==0){
+	if(strcmp("bat_level.txt",obj) == 0)
+	{
 
-		len = sprintf (buf,"%s=\"%u%%\"",obj,value);
+		len = sprintf (buf,"%s=\"%u%%\"",obj, value);
 
-	}else if(strcmp("power.txt",obj)==0){
+	}
+	else if(strcmp("power.txt",obj) == 0)
+	{
 
-		len = sprintf (buf,"%s=\"%u W\"",obj,value);
+		len = sprintf (buf,"%s=\"%u W\"",obj, value);
 
-	}else if(strcmp("bat_voltage.txt",obj)==0){
+	}
+	else if(strcmp("bat_voltage.txt",obj) == 0)
+	{
 
-		len = sprintf (buf,"%s=\"%u V\"",obj,value);
+		len = sprintf (buf,"%s=\"%u V\"",obj, value);
 
-	}else{
-		len = sprintf (buf,"%s=\"%u\"",obj,value);
+	}
+	else
+	{
+		len = sprintf (buf,"%s=\"%u\"",obj, value);
 	}
 
 	HAL_UART_Transmit(&huart, (uint8_t *)buf, len, 1000);
 	HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
 }
 
-void PANTALLA_API_SendtoPB(char *obj, uint16_t value,UART_HandleTypeDef huart)
+void PANTALLA_API_SendtoPB(char *obj, uint16_t value, UART_HandleTypeDef huart)
 {
     char buf[30];
     int len = sprintf(buf, "%s=%u", obj, value);
@@ -93,7 +100,7 @@ void PANTALLA_API_SendtoPB(char *obj, uint16_t value,UART_HandleTypeDef huart)
     HAL_UART_Transmit(&huart, Cmd_End, 3, 3000);
 }
 
-void PANTALLA_API_SendtoImage(char *obj, uint16_t value,UART_HandleTypeDef huart){
+void PANTALLA_API_SendtoImage(char *obj, uint16_t value, UART_HandleTypeDef huart){
 
     char buf[30];
     int len = 0;

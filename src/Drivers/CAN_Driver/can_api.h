@@ -1,7 +1,7 @@
 /**
  * @file can_api.h
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Declaraciones capa de alto nivel CAN
+ * @brief Archivo header para can_api.c
  * @version 0.1
  * @date 2022-02-05
  *
@@ -51,7 +51,7 @@ typedef enum
 } can_rtr_t;
 
 /**
-  * @brief  CAN Status declaration
+  * @brief CAN Status type declaration
   *
   */
 typedef enum

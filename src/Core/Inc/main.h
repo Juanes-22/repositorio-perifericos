@@ -32,9 +32,6 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-/* Include BSP (board support package) */
-#include "stm32f4xx_perifericos.h"
-
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

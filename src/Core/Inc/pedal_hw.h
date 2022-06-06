@@ -16,10 +16,15 @@
  * Included files
  **********************************************************************************************************************/
 
+/* BSP (board support package) include */
+#include "stm32f4xx_perifericos.h"
+
+/* STM32 specific hardware configuration includes */
 #include "adc.h"
 #include "dma.h"
 #include "tim.h"
 
+/* STM32 HAL include */
 #include "main.h"
 
 /***********************************************************************************************************************

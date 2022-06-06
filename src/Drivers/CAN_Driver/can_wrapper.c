@@ -1,7 +1,7 @@
 /**
  * @file can_wrapper.c
  * @author Subgrupo Control y Periféricos - Elektron Motorsports
- * @brief Implementaciones funciones wrapper CAN para tarjeta de Perifericos
+ * @brief Implementaciones funciones wrapper CAN para tarjeta Periféricos
  * @version 0.1
  * @date 2022-18-05
  *
@@ -48,7 +48,7 @@ static void CAN_FilterConfig(void);
  */
 can_status_t CAN_Wrapper_Init(void)
 {
-	/**
+	/*
 	 *  STM32 CAN initialization
 	 */
 
@@ -96,7 +96,7 @@ can_status_t CAN_Wrapper_Init(void)
  */
 can_status_t CAN_Wrapper_TransmitData(uint32_t id, uint8_t ide, uint8_t rtr, uint8_t dlc, uint8_t *data)
 {
-	/**
+	/*
 	 *  STM32 CAN transmit message
 	 */
 
@@ -129,7 +129,7 @@ can_status_t CAN_Wrapper_TransmitData(uint32_t id, uint8_t ide, uint8_t rtr, uin
  */
 can_status_t CAN_Wrapper_ReceiveData(uint32_t *id, uint8_t *data)
 {
-	/**
+	/*
 	 *  STM32 CAN receive message
 	 */
 
@@ -166,22 +166,64 @@ can_status_t CAN_Wrapper_DataCount(void)
  */
 static void CAN_FilterConfig(void)
 {
-	/**
+	/*
 	 *  STM32 CAN filter configuration
 	 */
 
-	/* CAN filter configuration structure */
-	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
-	sFilterConfig.FilterBank = 1;							// CAN 1 [0..13]
-	sFilterConfig.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+	/*
+	 * For single CAN instance the are 14 dedicated filter banks.
+	 * The FilterBank parameter must be a number between 0 and 13.
+	 *
+	 * In Mask mode the identifier registers are associated with
+	 * mask registers specifying which bits of the identifier are
+	 * handled as "must watch" or as "don't care".
+	 *
+	 * One 32-bit filter register per filter bank in Identifier Mask mode.
+	 * One 32-bit mask register per filter bank in Identifier Mask mode.
+	 *
+	 * CAN standard format: 11-bit identifier.
+	 *
+	 * 5-bit shifting for standard identifier mapping.
+	 */
 
-	sFilterConfig.FilterIdHigh = 0x30 << 5;					// msg_id << 5;  // 000 0011 0000
-	sFilterConfig.FilterIdLow = 0;
-	sFilterConfig.FilterMaskIdHigh = 0x3F << 5; 			// msg_id << 5;  // 000 0011 1111
-	sFilterConfig.FilterMaskIdLow = 0x0000;
-	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  		// ID // 001 0011 0000
+	/* CAN filter configuration shared among all configured filter banks */
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
+	sFilterConfig.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-	sFilterConfig.SlaveStartFilterBank = 0;
+
+	/* CAN filter configuration structure for Filter Bank 1 */
+	sFilterConfig.FilterBank = 1;
+	sFilterConfig.FilterIdHigh = 0x10 << 5;
+	sFilterConfig.FilterIdLow = 0x0000;
+	sFilterConfig.FilterMaskIdHigh = (0xFFFF << 3) << 5;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+
+	/* Configure CAN filter */
+	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig)!= HAL_OK)
+	{
+		Error_Handler();
+	}
+
+	/* CAN filter configuration structure for Filter Bank 2 */
+	sFilterConfig.FilterBank = 2;
+	sFilterConfig.FilterIdHigh = 0x20 << 5;
+	sFilterConfig.FilterIdLow = 0x0000;
+	sFilterConfig.FilterMaskIdHigh = (0xFFFF << 3) << 5;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+
+	/* Configure CAN filter */
+	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig)!= HAL_OK)
+	{
+		Error_Handler();
+	}
+
+	/* CAN filter configuration structure for Filter Bank 3 */
+	sFilterConfig.FilterBank = 3;
+	sFilterConfig.FilterIdHigh = 0x40 << 5;
+	sFilterConfig.FilterIdLow = 0x0000;
+	sFilterConfig.FilterMaskIdHigh = 0xFFFF << 5;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
 
 	/* Configure CAN filter */
 	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig)!= HAL_OK)

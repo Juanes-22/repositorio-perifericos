@@ -44,16 +44,16 @@ typedef_bus1_t bus_data =
 		.control_ok = kMODULE_INFO_ERROR
 	},
 	.Rx_Bms = {0},
-		.Rx_Inversor = {0}
+	.Rx_Inversor = {0}
 };
 
 /* Inicialización de bus de salida CAN (bus 2) */
 typedef_bus2_t bus_can_output =
 {
 	.pedal = 0,
-	.hombre_muerto = CAN_VALUE_HM_PRESSED,
+	.hombre_muerto = CAN_VALUE_HOMBRE_MUERTO_OFF,
 	.botones_cambio_estado = CAN_VALUE_BTN_NONE,
-	.perifericos_ok = CAN_VALUE_MODULE_OK
+	.perifericos_ok = CAN_VALUE_MODULE_IDLE
 };
 
 /* Inicialización de bus de recepción CAN (bus 3) */
@@ -61,5 +61,5 @@ typedef_bus3_t bus_can_input =
 {
 	.estado_manejo = CAN_VALUE_DRIVING_MODE_NORMAL,
 	.estado_falla = CAN_VALUE_FAILURE_CAUTION1,
-	.control_ok = CAN_VALUE_MODULE_OK
+	.control_ok = CAN_VALUE_MODULE_IDLE
 };

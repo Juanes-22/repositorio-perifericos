@@ -16,12 +16,21 @@
  * Included files
  **********************************************************************************************************************/
 
+/* CAN driver include */
 #include "can_api.h"
+
+/* CAN application includes */
 #include "can_hw.h"
 #include "can_def.h"
+
+/* Application includes */
 #include "decode_data.h"
 #include "buses.h"
 
+/* BSP (board support package) include */
+#include "stm32f4xx_perifericos.h"
+
+/* STM32 HAL include */
 #include "main.h"
 
 /***********************************************************************************************************************
@@ -29,7 +38,7 @@
  **********************************************************************************************************************/
 
 /**
- * @brief Función principal de CAN a nivel de aplicación
+ * @brief Función principal de CAN a nivel de aplicación.
  *
  * Guarda mensaje CAN recibido en bus de entrada CAN cuando se activa
  * bandera de recepción. Envía datos de bus de salida CAN cuando se
@@ -53,5 +62,17 @@ void CAN_APP_Process(void);
  * @retval None
  */
 void CAN_APP_Send_BusData(typedef_bus2_t *bus_can_output);
+
+/**
+ * @brief Función guardar mensaje CAN recibido en bus de entrada CAN.
+ *
+ * Según standard identifier que se recibió, guarda dato en variables de bus de recepción CAN.
+ *
+ * No es static, por lo que puede ser usada por otros archivos.
+ *
+ * @param None
+ * @retval None
+ */
+void CAN_APP_Store_ReceivedMessage(void);
 
 #endif /* _CAN_APP_H_ */

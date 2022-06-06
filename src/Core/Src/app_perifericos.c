@@ -103,7 +103,7 @@ void MX_APP_Process(void)
 
 		while(1)
 		{
-			if( (HAL_GetTick() - blink_tickstart) > BLINK_TIME )
+			if((HAL_GetTick() - blink_tickstart) > BLINK_TIME)
 			{
 				/* Toggle LED 1 (Red LED) */
 				BSP_LED_Toggle(LED1);
@@ -111,14 +111,21 @@ void MX_APP_Process(void)
 				blink_tickstart = HAL_GetTick();
 			}
 
+		    /* Recibió mensaje CAN */
+		    if (flag_rx_can == CAN_MSG_RECEIVED)
+		    {
+		        CAN_APP_Store_ReceivedMessage();
+
+		        flag_rx_can = CAN_MSG_NOT_RECEIVED;
+		    }
+
 			/* Si se recibe Control OK, Periféricos responde con OK y está listo */
 			if (bus_can_input.control_ok == CAN_VALUE_MODULE_OK)
 			{
 				HAL_Delay(500);
 
-				bus_can_output.perifericos_ok = CAN_VALUE_MODULE_OK;
-
 				/* Send perifericos_ok MODULE_OK response */
+				bus_can_output.perifericos_ok = CAN_VALUE_MODULE_OK;
 				CAN_APP_Send_BusData(&bus_can_output);
 
 				/* Indicate that start up has finished */
@@ -134,7 +141,9 @@ void MX_APP_Process(void)
 	/* Estado tarjeta de Periféricos running */
 	case kRUNNING:
 
-	    DECODE_DATA_Process();
+		CAN_APP_Process();
+
+		DECODE_DATA_Process();
 
 	    BOTONES_Process();
 
@@ -143,15 +152,6 @@ void MX_APP_Process(void)
 	    PANTALLA_Process();
 
 	    INDICATORS_Process();
-
-	    if (flag_rx_can == CAN_MSG_RECEIVED) 
-		{
-	    	flag_rx_can = CAN_MSG_NOT_RECEIVED;
-
-	    	BSP_LED_Toggle(LED2);
-	    }
-
-	    //CAN_APP_Process();
 
 		break;
 	}
