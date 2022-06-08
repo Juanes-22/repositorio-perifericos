@@ -26,13 +26,13 @@
  * Private variables definitions
  **********************************************************************************************************************/
 
-/** @brief Array of CAN message's IDs to transmit */
-static uint32_t can_ids_array[CAN_NUM_OF_MSGS] = {CAN_ID_PERIFERICOS_PEDAL,
-                                                  CAN_ID_PERIFERICOS_HOMBRE_MUERTO,
-                                                  CAN_ID_PERIFERICOS_BOTONES_CAMBIO_ESTADO,
-                                                  CAN_ID_PERIFERICOS_OK};
-												  
-/** @brief Array of CAN message's value to transmit */
+/** @brief Array of CAN IDs to transmit */
+static const uint32_t can_ids_array[CAN_NUM_OF_MSGS] = {CAN_ID_PERIFERICOS_PEDAL,
+														CAN_ID_PERIFERICOS_HOMBRE_MUERTO,
+														CAN_ID_PERIFERICOS_BOTONES_CAMBIO_ESTADO,
+														CAN_ID_PERIFERICOS_OK};
+
+/** @brief Array of CAN values to transmit */
 static uint8_t can_values_array[CAN_NUM_OF_MSGS];
 
 /***********************************************************************************************************************

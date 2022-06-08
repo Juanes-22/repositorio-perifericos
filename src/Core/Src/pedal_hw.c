@@ -62,9 +62,6 @@ void PEDAL_HW_Init(void)
 /* Called when buffer is completely filled */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-	/* Turn on LED 3 (yellow LED) */
-	BSP_LED_Toggle(LED3);
-
 	/* Start ADC DMA again */
 	HAL_ADC_Start_DMA(hadc, (uint32_t*)adc_buf, ADC_BUF_LEN);
 

@@ -19,9 +19,19 @@
  * Private macros
  **********************************************************************************************************************/
 
+/* Tiempo en ms para tolerancia de tiempo de HOMBRE_MUERTO_ON */
+#define HM_TIME_TOLERANCE_MS		1000U
+
 /***********************************************************************************************************************
  * Private variables definitions
  **********************************************************************************************************************/
+
+/* Estados para conteo de tolerancia de tiempo de HOMBRE_MUERTO_ON */
+enum
+{
+	HM_ON_TIME_COUNTING_START=0,
+	HM_ON_TIME_COUNTING_CHECK
+};
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -131,22 +141,47 @@ static void BOTONES_Update_HM_Btns(void)
  * @brief Actualiza estado de hombre muerto de acuerdo
  * a los valores de pulsador HM1 y HM2 en el bus de datos.
  *
+ * Tiene en cuenta una tolerancia de tiempo para cambiar a estado de hombre muerto ON,
+ * de manera que no se de un cambio instantáneo que pueda perjudicar el manejo del vehículo.
+ *
  * @param None
  * @retval None
  */
 static void BOTONES_Update_HM_State(void)
 {
-	/* Ambos pulsadores de hombre muerto no presionados */
-	if(bus_data.btn_hm1 == kBTN_NOT_PRESSED && bus_data.btn_hm2 == kBTN_NOT_PRESSED)
-	{
-		bus_data.hm_state = kHOMBRE_MUERTO_ON;
-	}
+	static uint8_t hm_on_time_counting_state = HM_ON_TIME_COUNTING_START;
 
-	/* Cualquiera de los pulsadores de hombre muerto presionados */
-	else if(bus_data.btn_hm1 == kBTN_PRESSED || bus_data.btn_hm2 == kBTN_PRESSED)
+	static uint32_t tickstart = 0;
+
+	/* Si cualquiera de los pulsadores de hombre muerto están presionados -> hombre muerto OFF */
+	if(bus_data.btn_hm1 == kBTN_PRESSED || bus_data.btn_hm2 == kBTN_PRESSED)
 	{
 		bus_data.hm_state = kHOMBRE_MUERTO_OFF;
+		hm_on_time_counting_state = HM_ON_TIME_COUNTING_START;
 	}
+
+	/* Si ámbos pulsadores de hombre muerto no están presionados -> hombre muerto ON */
+	else if(bus_data.btn_hm1 == kBTN_NOT_PRESSED && bus_data.btn_hm2 == kBTN_NOT_PRESSED)
+	{
+		switch(hm_on_time_counting_state)
+		{
+			case HM_ON_TIME_COUNTING_START:
+				tickstart = HAL_GetTick();
+				hm_on_time_counting_state = HM_ON_TIME_COUNTING_CHECK;
+				break;
+			case HM_ON_TIME_COUNTING_CHECK:
+				/* Cambia a HOMBRE_MUERTO_ON solo si ambos pulsadores no están presionados por un tiempo HM_TIME_TOLERANCE_MS */
+				if(HAL_GetTick() - tickstart > HM_TIME_TOLERANCE_MS)
+				{
+					bus_data.hm_state = kHOMBRE_MUERTO_ON;
+					hm_on_time_counting_state = HM_ON_TIME_COUNTING_START;
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
 }
 
 /**

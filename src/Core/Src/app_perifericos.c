@@ -30,7 +30,7 @@
  **********************************************************************************************************************/
 
 /** Duración de blink de LED de estado kWAITING_ECHO en ms */
-#define BLINK_TIME              250U
+#define BLINK_TIME_MS            	250U
 
 /***********************************************************************************************************************
  * Private variables definitions
@@ -103,7 +103,7 @@ void MX_APP_Process(void)
 
 		while(1)
 		{
-			if((HAL_GetTick() - blink_tickstart) > BLINK_TIME)
+			if((HAL_GetTick() - blink_tickstart) > BLINK_TIME_MS)
 			{
 				/* Toggle LED 1 (Red LED) */
 				BSP_LED_Toggle(LED1);

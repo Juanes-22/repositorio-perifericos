@@ -20,15 +20,11 @@
  **********************************************************************************************************************/
 
 /** @brief Intervalo de tiempo de transmisión serial a pantalla Nextion en ms */
-#define DISPLAY_TRANSMIT_INTERVAL		100U
+#define DISPLAY_TRANSMIT_INTERVAL_MS		100U
 
 /***********************************************************************************************************************
  * Private variables definitions
  **********************************************************************************************************************/
-
-static uint32_t tickstart;
-
-static int value = 0;
 
 /***********************************************************************************************************************
  * Private functions prototypes
@@ -60,10 +56,15 @@ void PANTALLA_Process(void)
 static void PANTALLA_Demo(void)
 {
 	/* Ticks for serial transmit to Nextion display */
-	tickstart = HAL_GetTick();
+	static uint32_t tickstart = 0;
 
-	if((HAL_GetTick() - tickstart) > DISPLAY_TRANSMIT_INTERVAL)
+	int speed = 0;
+
+	if((HAL_GetTick() - tickstart) > DISPLAY_TRANSMIT_INTERVAL_MS)
 	{
+		/* Turn on LED 3 (yellow LED) */
+		BSP_LED_Toggle(LED3);
+
 		/* Envía estado hombre muerto */
 		if(bus_data.hm_state == kHOMBRE_MUERTO_ON)
 		{
@@ -89,16 +90,16 @@ static void PANTALLA_Demo(void)
 		}
 
 		/* Envía velocidad */
-		value = (int) bus_data.pedal;
+		speed = (int) bus_data.pedal;
 
-		if(value == 100)
+		if(speed == 100)
 		{
 			PANTALLA_API_SendtoTxt("speed.txt", 99, huart6);
 		}
 		else
 		{
-			PANTALLA_API_SendtoTxt("speed.txt", value, huart6);
-			PANTALLA_API_SendtoPB("speed_bar.val", value, huart6);
+			PANTALLA_API_SendtoTxt("speed.txt", speed, huart6);
+			PANTALLA_API_SendtoPB("speed_bar.val", speed, huart6);
 		}
 
 		/* Reset ticks */

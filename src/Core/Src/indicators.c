@@ -20,13 +20,13 @@
  **********************************************************************************************************************/
 
 /** @brief Duración de blink de los LEDs en ms */
-#define BLINK_TIME                  250U
+#define BLINK_TIME_MS				250U
 
 /** @brief Duración para apagado de los LEDs en ms */
-#define LEDS_TURNOFF_TIME           3000U
+#define LEDS_TURNOFF_TIME_MS		3000U
 
 /** @brief Duración para apagado del buzzer en ms */
-#define BUZZER_TURNOFF_TIME         2000U
+#define BUZZER_TURNOFF_TIME_MS		2000U
 
 /***********************************************************************************************************************
  * Private variables definitions
@@ -85,7 +85,7 @@ void INDICATORS_Finish_StartUp(void)
 
     while(1)
     {
-        if( (HAL_GetTick() - blink_tickstart) > BLINK_TIME )  		// 250ms
+        if((HAL_GetTick() - blink_tickstart) > BLINK_TIME_MS)
         {
             BSP_LED_Toggle(LED1);
             BSP_LED_Toggle(LED2);
@@ -94,18 +94,18 @@ void INDICATORS_Finish_StartUp(void)
             blink_tickstart = HAL_GetTick();
         }
 
-        if( (HAL_GetTick() - tickstart) > BUZZER_TURNOFF_TIME )   	// 2s
+        if((HAL_GetTick() - tickstart) > BUZZER_TURNOFF_TIME_MS)
         {
             BSP_BUZZER_Off();
         }
 
-        if( (HAL_GetTick() - tickstart) > LEDS_TURNOFF_TIME )   	// 3s
+        if((HAL_GetTick() - tickstart) > LEDS_TURNOFF_TIME_MS)
         {
             BSP_LED_Off(LED1);
             BSP_LED_Off(LED2);
             BSP_LED_Off(LED3);
 
-            break;  // startup is completed
+            break;
         }
     }
 }
