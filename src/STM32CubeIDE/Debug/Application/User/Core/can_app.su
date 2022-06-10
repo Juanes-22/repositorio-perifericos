@@ -1,3 +1,0 @@
-can_app.c:58:6:CAN_APP_Process	8	static
-can_app.c:113:6:CAN_APP_Send_BusData	16	static
-can_app.c:155:6:CAN_APP_Store_ReceivedMessage	4	static

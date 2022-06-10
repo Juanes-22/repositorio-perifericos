@@ -59,6 +59,9 @@ static void PANTALLA_Demo(void)
 	static uint32_t tickstart = 0;
 
 	int speed = 0;
+	int bat_level = 0;
+	int bat_voltage = 0;
+	int power = 0;
 
 	if((HAL_GetTick() - tickstart) > DISPLAY_TRANSMIT_INTERVAL_MS)
 	{
@@ -76,15 +79,15 @@ static void PANTALLA_Demo(void)
 		}
 
 		/* Envía modo de manejo */
-		if(bus_data.btn_modo_manejo == kBTN_ECO)
+		if(bus_data.Rx_Control.driving_mode == kDRIVING_MODE_ECO)
 		{
 			PANTALLA_API_SendtoImage("driving_mode.pic", 1, huart6);
 		}
-		else if(bus_data.btn_modo_manejo == kBTN_NORMAL)
+		else if(bus_data.Rx_Control.driving_mode == kDRIVING_MODE_NORMAL)
 		{
 			PANTALLA_API_SendtoImage("driving_mode.pic", 2, huart6);
 		}
-		else if(bus_data.btn_modo_manejo == kBTN_SPORT)
+		else if(bus_data.Rx_Control.driving_mode == kDRIVING_MODE_SPORT)
 		{
 			PANTALLA_API_SendtoImage("driving_mode.pic", 3, huart6);
 		}
@@ -101,6 +104,18 @@ static void PANTALLA_Demo(void)
 			PANTALLA_API_SendtoTxt("speed.txt", speed, huart6);
 			PANTALLA_API_SendtoPB("speed_bar.val", speed, huart6);
 		}
+
+		/* Envía nivel de batería */
+		bat_level = (int)bus_data.Rx_Bms.nivel_bateria;
+		PANTALLA_API_SendtoTxt("bat_level.txt", bat_level, huart6);
+
+		/* Envía voltaje batería */
+		bat_voltage = (int)bus_data.Rx_Bms.voltaje;
+		PANTALLA_API_SendtoTxt("bat_voltage.txt", bat_voltage, huart6);
+
+		/* Envía potencia */
+		power = (int)bus_data.Rx_Bms.potencia;
+		PANTALLA_API_SendtoTxt("power.txt", power, huart6);
 
 		/* Reset ticks */
 		tickstart = HAL_GetTick();

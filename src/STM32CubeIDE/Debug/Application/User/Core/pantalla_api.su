@@ -1,5 +1,0 @@
-pantalla_api.c:37:6:PANTALLA_API_SendtoGauge	56	static
-pantalla_api.c:53:6:PANTALLA_API_SendtoNum	56	static
-pantalla_api.c:62:6:PANTALLA_API_SendtoTxt	56	static
-pantalla_api.c:94:6:PANTALLA_API_SendtoPB	56	static
-pantalla_api.c:103:6:PANTALLA_API_SendtoImage	56	static

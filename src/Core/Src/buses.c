@@ -61,5 +61,5 @@ typedef_bus3_t bus_can_input =
 {
 	.estado_manejo = CAN_VALUE_DRIVING_MODE_NORMAL,
 	.estado_falla = CAN_VALUE_FAILURE_CAUTION1,
-	.control_ok = CAN_VALUE_MODULE_IDLE
+	.control_ok = CAN_VALUE_MODULE_OK
 };

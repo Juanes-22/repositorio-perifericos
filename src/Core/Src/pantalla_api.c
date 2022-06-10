@@ -139,6 +139,7 @@ void PANTALLA_API_SendtoImage(char *obj, uint16_t value, UART_HandleTypeDef huar
         else if (value == 3)
         {
             pic = 25; // sport
+            len = sprintf(buf, "%s=%u", obj, pic);
         }
     }
     else if (strcmp(obj, "warning.pic") == 0)

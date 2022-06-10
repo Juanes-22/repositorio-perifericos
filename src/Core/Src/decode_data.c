@@ -136,10 +136,10 @@ static void DECODE_DATA_Decode_Control(void)
 static void DECODE_DATA_Decode_Bms(void)
 {
 	/* Decodifica las variables analógicas de BMS */
-    Rx_Bms->voltaje = (rx_var_t)bus_can_input.voltaje_bms;
-    Rx_Bms->corriente = (rx_var_t)bus_can_input.corriente_bms;
-    Rx_Bms->potencia = (rx_var_t)bus_can_input.potencia_bms;
-    Rx_Bms->nivel_bateria = (rx_var_t)bus_can_input.nivel_bateria_bms;
+    Rx_Bms->voltaje = (float)bus_can_input.voltaje_bms;
+    Rx_Bms->corriente = (float)bus_can_input.corriente_bms;
+    Rx_Bms->potencia = (float)bus_can_input.potencia_bms;
+    Rx_Bms->nivel_bateria = (float)bus_can_input.nivel_bateria_bms;
 }
 
 /**
@@ -153,5 +153,5 @@ static void DECODE_DATA_Decode_Bms(void)
 static void DECODE_DATA_Decode_Inversor(void)
 {
 	/* Decodifica las variables analógicas de Inversor */
-    Rx_Inversor->velocidad = (rx_var_t)bus_can_input.velocidad_inv;
+    Rx_Inversor->velocidad = (float)bus_can_input.velocidad_inv;
 }

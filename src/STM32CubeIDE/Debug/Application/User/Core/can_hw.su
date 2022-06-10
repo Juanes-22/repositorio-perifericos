@@ -1,3 +1,0 @@
-can_hw.c:43:6:CAN_HW_Init	24	static
-can_hw.c:62:6:HAL_CAN_RxFifo0MsgPendingCallback	16	static
-can_hw.c:77:6:HAL_TIM_PeriodElapsedCallback	16	static

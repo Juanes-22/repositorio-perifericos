@@ -1,2 +1,0 @@
-indicators.c:51:6:INDICATORS_Process	4	static,ignoring_inline_asm
-indicators.c:68:6:INDICATORS_Finish_StartUp	16	static

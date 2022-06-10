@@ -126,7 +126,7 @@ void MX_APP_Process(void)
 
 				/* Send perifericos_ok MODULE_OK response */
 				bus_can_output.perifericos_ok = CAN_VALUE_MODULE_OK;
-				CAN_APP_Send_BusData(&bus_can_output);
+				//CAN_APP_Send_BusData(&bus_can_output);
 
 				/* Indicate that start up has finished */
 				INDICATORS_Finish_StartUp();
@@ -141,7 +141,7 @@ void MX_APP_Process(void)
 	/* Estado tarjeta de Periféricos running */
 	case kRUNNING:
 
-		CAN_APP_Process();
+		//CAN_APP_Process();
 
 		DECODE_DATA_Process();
 

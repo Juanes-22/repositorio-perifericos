@@ -20,7 +20,7 @@
  **********************************************************************************************************************/
 
 /* Tiempo en ms para tolerancia de tiempo de HOMBRE_MUERTO_ON */
-#define HM_TIME_TOLERANCE_MS		1000U
+#define HM_TIME_TOLERANCE_MS		2000U
 
 /***********************************************************************************************************************
  * Private variables definitions

@@ -1,3 +1,0 @@
-pedal.c:53:6:PEDAL_Process	8	static
-pedal.c:73:13:PEDAL_Map_ADC_Reading	8	static
-pedal.c:105:13:PEDAL_Send_Pedal_Value	16	static

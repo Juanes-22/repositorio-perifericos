@@ -34,12 +34,6 @@ typedef enum
 	kMODULE_INFO_ERROR /**< Modulo ERROR */
 } module_info_t;
 
-/**
- * @brief Tipo de dato para variable analogica decodificada
- *
- */
-typedef float rx_var_t;
-
 /********************************************************************************
  *                              PERIFERICOS                                     *
  *******************************************************************************/
@@ -126,12 +120,12 @@ typedef struct
  */
 typedef struct
 {
-    rx_var_t        voltaje;
-    rx_var_t        corriente;
-    rx_var_t        voltaje_min_celda;
-    rx_var_t        potencia;
-    rx_var_t        t_max;
-    rx_var_t        nivel_bateria;
+    float	voltaje;
+    float	corriente;
+    float	voltaje_min_celda;
+    float	potencia;
+    float	t_max;
+    float	nivel_bateria;
 
 } rx_bms_vars_t;
 
@@ -145,7 +139,7 @@ typedef struct
  */
 typedef struct
 {
-    rx_var_t        velocidad;
+    float	velocidad;
 
 } rx_inversor_vars_t;
 
